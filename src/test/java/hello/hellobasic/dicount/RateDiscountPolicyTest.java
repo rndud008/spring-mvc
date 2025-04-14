@@ -2,7 +2,6 @@ package hello.hellobasic.dicount;
 
 import hello.hellobasic.member.Grade;
 import hello.hellobasic.member.Member;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

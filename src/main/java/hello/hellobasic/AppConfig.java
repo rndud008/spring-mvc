@@ -2,6 +2,7 @@ package hello.hellobasic;
 
 import hello.hellobasic.dicount.DiscountPolicy;
 import hello.hellobasic.dicount.FixDiscountPolicy;
+import hello.hellobasic.dicount.RateDiscountPolicy;
 import hello.hellobasic.member.MemberRepository;
 import hello.hellobasic.member.MemberService;
 import hello.hellobasic.member.MemberServiceImpl;
@@ -23,7 +24,8 @@ public class AppConfig {
     }
 
     public DiscountPolicy discountPolicy(){
-        return new FixDiscountPolicy();
+//        return new FixDiscountPolicy();
+        return new RateDiscountPolicy();
     }
 
 }
