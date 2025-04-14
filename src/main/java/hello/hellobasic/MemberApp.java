@@ -1,13 +1,11 @@
 package hello.hellobasic;
 
-import hello.hellobasic.member.Grade;
-import hello.hellobasic.member.Member;
-import hello.hellobasic.member.MemberService;
-import hello.hellobasic.member.MemberServiceImpl;
+import hello.hellobasic.member.*;
 
 public class MemberApp {
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
         Member member = new Member(1l, "memberA", Grade.VIP);
         memberService.join(member);
 
