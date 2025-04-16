@@ -3,7 +3,7 @@ package hello.hellobasic.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public class NetworkClient implements InitializingBean, DisposableBean {
+public class NetworkClient{
     private String url;
     public NetworkClient(){
         System.out.println("생성자 호출, url = " + url);
@@ -28,20 +28,18 @@ public class NetworkClient implements InitializingBean, DisposableBean {
         System.out.println("close: " + url);
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        // 스프링 전용 인터페이스 해당 코드가 스프링 전용 인터페이스에 의존
-        // 초기화, 소멸 메서드의 이름을 변경할수 없음
-        System.out.println("NetworkClient.afterPropertiesSet");
+
+    public void init() throws Exception {
+        // 메서드이름을 자유롭게 줄수 있고 스프링 빈이 스프링 코드에 의존 하지 않음
+        System.out.println("NetworkClient.init");
         connect();
         call("초기화 연결 메시지");
     }
 
-    @Override
-    public void destroy() throws Exception {
-        // 스프링 전용 인터페이스 해당 코드가 스프링 전용 인터페이스에 의존
-        // 초기화, 소멸 메서드의 이름을 변경할수 없음
-        System.out.println("NetworkClient.destroy");
+
+    public void close() throws Exception {
+        // 메서드이름을 자유롭게 줄수 있고 스프링 빈이 스프링 코드에 의존 하지 않음
+        System.out.println("NetworkClient.close");
         disconnect();
     }
 }
