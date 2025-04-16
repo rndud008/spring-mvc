@@ -1,5 +1,7 @@
 package hello.hellobasic.lifecycle;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -29,6 +31,7 @@ public class NetworkClient{
     }
 
 
+    @PostConstruct
     public void init() throws Exception {
         // 메서드이름을 자유롭게 줄수 있고 스프링 빈이 스프링 코드에 의존 하지 않음
         System.out.println("NetworkClient.init");
@@ -36,7 +39,7 @@ public class NetworkClient{
         call("초기화 연결 메시지");
     }
 
-
+    @PreDestroy
     public void close() throws Exception {
         // 메서드이름을 자유롭게 줄수 있고 스프링 빈이 스프링 코드에 의존 하지 않음
         System.out.println("NetworkClient.close");
