@@ -75,14 +75,25 @@ public class BasicItemController {
         return "basic/item";
     }
 
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItmeV4(
             Item item
             , Model model
     ) {
         itemRepository.save(item);
         //model.addAttribute("item",item); // 자동추가 ,생략가능
+        // 해당 페이지로 이동한후 url 이 변경되지 않아 브라우저 새로고침시 post 요청발생하는 문제
         return "basic/item";
+    }
+
+    @PostMapping("/add")
+    public String addItmeV5(
+            Item item
+            , Model model
+    ) {
+        itemRepository.save(item);
+        //model.addAttribute("item",item); // 자동추가 ,생략가능
+        return "redirect:/basic/items/" + item.getId();
     }
 
     @GetMapping("/{itemId}/edit")
