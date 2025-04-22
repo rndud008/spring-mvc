@@ -9,6 +9,7 @@ import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class BasicItemController {
         return "basic/item";
     }
 
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItmeV5(
             Item item
             , Model model
@@ -94,6 +95,20 @@ public class BasicItemController {
         itemRepository.save(item);
         //model.addAttribute("item",item); // 자동추가 ,생략가능
         return "redirect:/basic/items/" + item.getId();
+    }
+
+    @PostMapping("/add")
+    public String addItmeV6(
+            Item item
+            , Model model
+            , RedirectAttributes redirectAttributes
+            ) {
+        Item savedItem = itemRepository.save(item);
+        //model.addAttribute("item",item); // 자동추가 ,생략가능
+        redirectAttributes.addAttribute("itemId",savedItem.getId());
+        redirectAttributes.addAttribute("status",true);
+        // html 에서 param.status로 편리하게 조회 가능.
+        return "redirect:/basic/items/{itemId}";
     }
 
     @GetMapping("/{itemId}/edit")
