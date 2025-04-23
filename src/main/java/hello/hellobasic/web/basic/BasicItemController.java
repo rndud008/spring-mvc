@@ -2,6 +2,7 @@ package hello.hellobasic.web.basic;
 
 import hello.hellobasic.domain.item.Item;
 import hello.hellobasic.domain.item.ItemRepository;
+import hello.hellobasic.domain.item.ItemType;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,11 @@ public class BasicItemController {
         regions.put("BUSAN","부산");
         regions.put("JEJU","제주");
         return regions;
+    }
+
+    @ModelAttribute("itemTypes")
+    public ItemType[] itemTypes(){
+        return ItemType.values();
     }
 
     @GetMapping
@@ -120,6 +126,8 @@ public class BasicItemController {
             , RedirectAttributes redirectAttributes
             ) {
         log.info("item.open={}", item.getOpen());
+        log.info("item.regions={}", item.getRegions());
+        log.info("item.itemType={}", item.getItemType());
         Item savedItem = itemRepository.save(item);
         //model.addAttribute("item",item); // 자동추가 ,생략가능
         redirectAttributes.addAttribute("itemId",savedItem.getId());
