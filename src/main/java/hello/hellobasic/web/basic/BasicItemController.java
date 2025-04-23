@@ -4,6 +4,7 @@ import hello.hellobasic.domain.item.Item;
 import hello.hellobasic.domain.item.ItemRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/basic/items")
 @RequiredArgsConstructor
@@ -104,6 +106,7 @@ public class BasicItemController {
             , Model model
             , RedirectAttributes redirectAttributes
             ) {
+        log.info("item.open={}", item.getOpen());
         Item savedItem = itemRepository.save(item);
         //model.addAttribute("item",item); // 자동추가 ,생략가능
         redirectAttributes.addAttribute("itemId",savedItem.getId());
