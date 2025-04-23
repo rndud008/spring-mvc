@@ -71,7 +71,11 @@ public class BasicController {
     return "basic/basic-objects";
     }
 
-
+    @GetMapping("/date")
+    public String date(Model model){
+        model.addAttribute("localDateTime", LocalDateTime.now());
+        return "basic/date";
+    }
 
 
     @Component("helloBean")
