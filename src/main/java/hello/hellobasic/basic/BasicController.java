@@ -1,11 +1,16 @@
 package hello.hellobasic.basic;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +48,37 @@ public class BasicController {
         model.addAttribute("userMap",map);
 
         return "basic/variable";
+    }
+
+    @GetMapping("/basic-objects")
+    public String basicObjects(Model model, HttpServletRequest request,
+                               HttpServletResponse response, HttpSession session) {
+
+        session.setAttribute("sessionData","Hello Session");
+        model.addAttribute("request", request);
+        model.addAttribute("response", response);
+        model.addAttribute("servletContext", request.getServletContext());
+
+        // 스프링 부트 3.0 부터는  ${#request}, ${#response}, ${#session}, ${#servletContext} 를 지원하지 않는다.
+        // 만약 사용하게 되면 다음과 같은 오류가 발생한다.
+
+        // Caused by: java.lang.IllegalArgumentException: The
+        //'request','session','servletContext' and 'response' expression utility objects
+        //are no longer available by default for template expressions and their use is not
+        //recommended. In cases where they are really needed, they should be manually
+        //added as context variables.
+
+    return "basic/basic-objects";
+    }
+
+
+
+
+    @Component("helloBean")
+    static class HelloBean{
+        public String hello(String data){
+            return "Hello " + data;
+        }
     }
 
     @Data
