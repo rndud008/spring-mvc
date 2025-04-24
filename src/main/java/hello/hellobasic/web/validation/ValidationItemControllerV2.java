@@ -24,6 +24,7 @@ import java.util.Map;
 public class ValidationItemControllerV2 {
 
     private final ItemRepository itemRepository;
+    private final ItemValidator itemValidator;
 
     @GetMapping
     public String items(Model model) {
@@ -158,7 +159,7 @@ public class ValidationItemControllerV2 {
         return "redirect:/validation/v2/items/{itemId}";
     }
 
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV4(@ModelAttribute Item item
             , BindingResult bindingResult
             , RedirectAttributes redirectAttributes, Model model) {
@@ -175,7 +176,7 @@ public class ValidationItemControllerV2 {
             bindingResult.rejectValue("price", "range", new Object[]{1_000, 1_000_000}, null);
         }
         if (item.getQuantity() == null || item.getQuantity() >= 9999) {
-            bindingResult.rejectValue("price", "max", new Object[]{9_999}, null);
+            bindingResult.rejectValue("quantity", "max", new Object[]{9_999}, null);
         }
 
         // 특정 필드가 아닌 복합 룰 검증
@@ -185,6 +186,25 @@ public class ValidationItemControllerV2 {
                 bindingResult.reject("totalPriceMin", new Object[]{10_000, resultPrice}, null);
             }
         }
+
+        // 검증에 실패하면 다시 입력 폼으로
+        if (bindingResult.hasErrors()) {
+            log.info("bindingResult={}", bindingResult);
+            return "validation/v2/addForm";
+        }
+
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/validation/v2/items/{itemId}";
+    }
+
+    @PostMapping("/add")
+    public String addItemV5(@ModelAttribute Item item
+            , BindingResult bindingResult
+            , RedirectAttributes redirectAttributes, Model model) {
+
+        itemValidator.validate(item,bindingResult);
 
         // 검증에 실패하면 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
