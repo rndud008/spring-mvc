@@ -11,17 +11,18 @@ import org.hibernate.validator.constraints.ScriptAssert;
 // 자바 15 이후로 Nashorn 엔진이 제거됐고 자바 17 이상을 쓰면 기본으로 JavaScript 엔진이 아예 없으므로 ScriptEvaluatorNotFoundException 발생
 public class Item {
 
+    @NotNull(groups = UpdateCheck.class)
     private Long id;
 
-    @NotBlank(message = "공백X")
+    @NotBlank(message = "공백X", groups = {SaveCheck.class, UpdateCheck.class})
     private String itemName;
 
-    @NotNull
-    @Range(min = 1_000, max = 1_000_000)
+    @NotNull(groups = {SaveCheck.class, UpdateCheck.class})
+    @Range(min = 1_000, max = 1_000_000,groups = {SaveCheck.class, UpdateCheck.class})
     private Integer price;
 
-    @NotNull
-    @Range( max = 9_999)
+    @NotNull(groups = {SaveCheck.class, UpdateCheck.class})
+    @Range( max = 9_999, groups = {SaveCheck.class})
     private Integer quantity;
 
     public Item() {
