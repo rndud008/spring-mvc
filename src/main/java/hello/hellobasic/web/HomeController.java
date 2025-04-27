@@ -6,6 +6,7 @@ import hello.hellobasic.web.session.SessionManager;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,7 @@ public class HomeController {
         return "loginHome";
     }
 
-    @GetMapping("/")
+//    @GetMapping("/")
     public String homeLoginV2(HttpServletRequest request, Model model){
 
         // 세션 관리자에 저장된 회원정보 조회
@@ -54,15 +55,43 @@ public class HomeController {
         return "loginHome";
     }
 
+    @GetMapping("/")
+    public String homeLoginV3(HttpServletRequest request, Model model){
+
+        // 세션 관리자에 저장된 회원정보 조회
+        HttpSession session = request.getSession(false);
+        if (session == null){
+            return "home";
+        }
+
+        Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+
+        if (loginMember == null){
+            return "home";
+        }
+
+        model.addAttribute("member", loginMember);
+        return "loginHome";
+    }
+
 //    @PostMapping("/logout")
     public String logoutV1(HttpServletResponse response){
         expireCookie(response,"memberId");
         return "redirect:/";
     }
 
-    @PostMapping("/logout")
+//    @PostMapping("/logout")
     public String logoutV2(HttpServletRequest request){
         sessionManager.expire(request);
+        return "redirect:/";
+    }
+
+    @PostMapping("/logout")
+    public String logoutV3(HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if (session != null){
+            session.invalidate();
+        }
         return "redirect:/";
     }
 
