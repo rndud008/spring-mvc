@@ -2,6 +2,7 @@ package hello.hellobasic.web;
 
 import hello.hellobasic.domain.member.Member;
 import hello.hellobasic.domain.member.MemberRepository;
+import hello.hellobasic.web.argumentresolver.Login;
 import hello.hellobasic.web.session.SessionManager;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -75,8 +76,19 @@ public class HomeController {
         return "loginHome";
     }
 
-    @GetMapping("/")
+//    @GetMapping("/")
     public String homeLoginV3Spring(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember, Model model){
+
+        if (loginMember == null){
+            return "home";
+        }
+
+        model.addAttribute("member", loginMember);
+        return "loginHome";
+    }
+
+    @GetMapping("/")
+    public String homeLoginV3ArgumentResolver(@Login Member loginMember, Model model){
 
         if (loginMember == null){
             return "home";

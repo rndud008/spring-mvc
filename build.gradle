@@ -19,6 +19,10 @@ configurations {
     }
 }
 
+tasks.named("compileJava") {
+    options.compilerArgs.add("-parameters")
+}
+
 repositories {
     mavenCentral()
 }
