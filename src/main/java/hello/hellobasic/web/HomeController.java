@@ -2,7 +2,9 @@ package hello.hellobasic.web;
 
 import hello.hellobasic.domain.member.Member;
 import hello.hellobasic.domain.member.MemberRepository;
+import hello.hellobasic.web.session.SessionManager;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,14 +19,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class HomeController {
     private final MemberRepository memberRepository;
+    private final SessionManager sessionManager;
 
 //    @GetMapping("/")
     public String home() {
         return "home";
     }
 
-    @GetMapping("/")
-    public String homeLogin(@CookieValue(name = "memberId",required = false) Long memberId, Model model){
+//    @GetMapping("/")
+    public String homeLoginV1(@CookieValue(name = "memberId",required = false) Long memberId, Model model){
         if (memberId == null){
             return "home";
         }
@@ -37,9 +40,29 @@ public class HomeController {
         return "loginHome";
     }
 
-    @PostMapping("/logout")
-    public String logout(HttpServletResponse response){
+    @GetMapping("/")
+    public String homeLoginV2(HttpServletRequest request, Model model){
+
+        // 세션 관리자에 저장된 회원정보 조회
+        Member member = (Member) sessionManager.getSession(request);
+
+        if (member == null){
+            return "home";
+        }
+
+        model.addAttribute("member", member);
+        return "loginHome";
+    }
+
+//    @PostMapping("/logout")
+    public String logoutV1(HttpServletResponse response){
         expireCookie(response,"memberId");
+        return "redirect:/";
+    }
+
+    @PostMapping("/logout")
+    public String logoutV2(HttpServletRequest request){
+        sessionManager.expire(request);
         return "redirect:/";
     }
 
