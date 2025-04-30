@@ -1,4 +1,4 @@
-package hello.hellobasic;
+package hello.hellobasic.repository;
 
 import hello.hellobasic.connection.DBConnectionUtil;
 import hello.hellobasic.domain.Member;
