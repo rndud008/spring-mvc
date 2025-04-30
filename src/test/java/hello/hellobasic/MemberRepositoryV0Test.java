@@ -20,6 +20,12 @@ class MemberRepositoryV0Test {
         Member member = new Member("memberV4", 10000);
         repository.save(member);
 
+        // findById
+        Member findMember = repository.findById(member.getMemberId());
+        log.info("findMember={}", findMember);
+        log.info("member == findMember {}", member == findMember);
+        log.info("member equals findMember {}", member.equals(findMember));
+        Assertions.assertThat(findMember).isEqualTo(member);
 
     }
 
