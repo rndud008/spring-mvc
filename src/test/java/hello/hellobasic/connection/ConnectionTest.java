@@ -1,5 +1,6 @@
 package hello.hellobasic.connection;
 
+import com.zaxxer.hikari.HikariDataSource;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -30,9 +31,33 @@ public class ConnectionTest {
         useDataSource(dataSource);
     }
 
+    @Test
+    void dataSourceConnectionPool() throws SQLException, InterruptedException {
+        // 커넥션 풀링
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl(URL);
+        dataSource.setUsername(USERNAME);
+        dataSource.setPassword(PASSWORD);
+        dataSource.setMaximumPoolSize(10);
+        dataSource.setPoolName("MyPool");
+
+        useDataSource(dataSource);
+        Thread.sleep(1000);// 생성시간 대기
+    }
+
     private void useDataSource(DataSource dataSource) throws SQLException {
         Connection con1 = dataSource.getConnection();
         Connection con2 = dataSource.getConnection();
+        Connection con3 = dataSource.getConnection();
+        Connection con4 = dataSource.getConnection();
+        Connection con5 = dataSource.getConnection();
+        Connection con6 = dataSource.getConnection();
+        Connection con7 = dataSource.getConnection();
+        Connection con8 = dataSource.getConnection();
+        Connection con9 = dataSource.getConnection();
+        Connection con10 = dataSource.getConnection();
+//        Connection con11 = dataSource.getConnection();
+        //yPool - Connection is not available, request timed out after 30011ms (total=10, active=10, idle=0, waiting=0)
         log.info("connection={}, class=={}",con1, con1.getClass());
         log.info("connection={}, class=={}",con2, con2.getClass());
     }
