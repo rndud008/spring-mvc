@@ -1,27 +1,41 @@
 package hello.hellobasic.excepito.basic;
 
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.net.ConnectException;
 import java.sql.SQLException;
 
+@Slf4j
 public class UnCheckedAppTest {
 
     @Test
-    void unchecked(){
+    void unchecked() {
         Controller controller = new Controller();
         Assertions.assertThatThrownBy(controller::request).isInstanceOf(Exception.class);
     }
 
+    @Test
+    void printEx() {
+        Controller controller = new Controller();
+        try {
+            controller.request();
 
-    static class Controller{
+        } catch (Exception e) {
+            log.info("ex", e);
+        }
+    }
+
+    static class Controller {
         Service service = new Service();
-        public void request()  {
+
+        public void request() {
             service.logic();
         }
     }
-    static class Service{
+
+    static class Service {
         Repository repository = new Repository();
         NetworkClient networkClient = new NetworkClient();
 
@@ -31,14 +45,14 @@ public class UnCheckedAppTest {
         }
     }
 
-    static class NetworkClient{
-        public void call()  {
+    static class NetworkClient {
+        public void call() {
             throw new RuntimeConnectException("연결실패");
         }
     }
 
-    static class Repository{
-        public void call()   {
+    static class Repository {
+        public void call() {
             try {
                 runSQL();
             } catch (SQLException e) {
@@ -51,8 +65,8 @@ public class UnCheckedAppTest {
         }
     }
 
-    static class RuntimeConnectException extends RuntimeException{
-        public RuntimeConnectException(String message){
+    static class RuntimeConnectException extends RuntimeException {
+        public RuntimeConnectException(String message) {
             super(message);
         }
     }
