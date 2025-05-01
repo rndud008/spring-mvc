@@ -1,4 +1,4 @@
-package hello.hellobasic.excepito.basic;
+package hello.hellobasic.excepiton.basic;
 
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;

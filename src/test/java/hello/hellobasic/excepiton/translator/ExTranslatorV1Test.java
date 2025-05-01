@@ -1,6 +1,5 @@
-package hello.hellobasic.excepito.basic.translator;
+package hello.hellobasic.excepiton.translator;
 
-import hello.hellobasic.connection.ConnectionConst;
 import hello.hellobasic.domain.Member;
 import hello.hellobasic.repository.ex.MyDbException;
 import hello.hellobasic.repository.ex.MyDuplicateKeyException;

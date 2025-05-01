@@ -1,4 +1,4 @@
-package hello.hellobasic.excepito.basic;
+package hello.hellobasic.excepiton.basic;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
