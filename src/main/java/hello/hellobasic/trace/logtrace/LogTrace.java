@@ -1,0 +1,9 @@
+package hello.hellobasic.trace.logtrace;
+
+import hello.hellobasic.trace.TraceStatus;
+
+public interface LogTrace {
+    TraceStatus begin(String message);
+    void end(TraceStatus status);
+    void exception(TraceStatus status, Exception e);
+}
