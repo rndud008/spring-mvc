@@ -5,11 +5,13 @@ import hello.hellobasic.repository.ItemRepository;
 import hello.hellobasic.repository.ItemSearchCond;
 import hello.hellobasic.repository.ItemUpdateDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class MyBatisItemRepository implements ItemRepository {
@@ -18,6 +20,7 @@ public class MyBatisItemRepository implements ItemRepository {
 
     @Override
     public Item save(Item item) {
+        log.info("itemMapper ={}",itemMapper.getClass());
         itemMapper.save(item);
         return item;
     }
