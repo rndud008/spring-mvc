@@ -102,4 +102,17 @@ class MemberServiceTest {
         Assertions.assertTrue(memberRepository.find(username).isEmpty());
         Assertions.assertTrue(logRepository.find(username).isEmpty());
     }
+
+    @Test
+    void recoverException_success(){
+        // given
+        String username = "로그예외_recoverException_success";
+
+        // when
+       memberService.joinV2(username);
+
+        // then
+        Assertions.assertTrue(memberRepository.find(username).isPresent());
+        Assertions.assertTrue(logRepository.find(username).isEmpty());
+    }
 }
