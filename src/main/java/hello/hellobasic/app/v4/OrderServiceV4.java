@@ -1,7 +1,7 @@
 package hello.hellobasic.app.v4;
 
 import hello.hellobasic.trace.logtrace.LogTrace;
-import hello.hellobasic.trace.trace.AbstractTemplate;
+import hello.hellobasic.trace.template.AbstractTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

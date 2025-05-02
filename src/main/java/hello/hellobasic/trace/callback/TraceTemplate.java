@@ -1,20 +1,21 @@
-package hello.hellobasic.trace.trace;
+package hello.hellobasic.trace.callback;
 
 import hello.hellobasic.trace.TraceStatus;
 import hello.hellobasic.trace.logtrace.LogTrace;
 
-public abstract class AbstractTemplate<T> {
+public class TraceTemplate {
+
     private final LogTrace trace;
 
-    protected AbstractTemplate(LogTrace trace) {
+    public TraceTemplate(LogTrace trace) {
         this.trace = trace;
     }
 
-    public T execute(String message){
+    public <T> T execute(String message , TraceCallback<T> callback){
         TraceStatus status = null;
         try {
             status = trace.begin(message);
-            T result = call();
+            T result = callback.call();
             trace.end(status);
             return result;
         }catch (Exception e){
@@ -22,7 +23,5 @@ public abstract class AbstractTemplate<T> {
             throw e;
         }
     }
-
-    protected abstract T call();
 
 }
