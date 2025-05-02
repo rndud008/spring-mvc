@@ -1,9 +1,6 @@
 package hello.hellobasic;
 
-import hello.hellobasic.config.JdbcTemplateV1Config;
-import hello.hellobasic.config.JdbcTemplateV2Config;
-import hello.hellobasic.config.JdbcTemplateV3Config;
-import hello.hellobasic.config.MemoryConfig;
+import hello.hellobasic.config.*;
 import hello.hellobasic.repository.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -19,7 +16,8 @@ import javax.sql.DataSource;
 //@Import(MemoryConfig.class)
 //@Import(JdbcTemplateV1Config.class)
 //@Import(JdbcTemplateV2Config.class)
-@Import(JdbcTemplateV3Config.class)
+//@Import(JdbcTemplateV3Config.class)
+@Import(MyBatisConfig.class)
 @SpringBootApplication(scanBasePackages = "hello.hellobasic.web")
 @Slf4j
 public class HelloBasicApplication {

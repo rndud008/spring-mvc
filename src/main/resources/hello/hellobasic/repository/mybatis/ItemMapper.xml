@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="hello.itemservice.repository.mybatis.ItemMapper">
+<mapper namespace="hello.hellobasic.repository.mybatis.ItemMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         insert into item (item_name, price, quantity)
-        values (#{itemName},#{price}, #quantity)
+        values (#{itemName},#{price}, #{quantity})
 
     </insert>
 
@@ -27,13 +27,13 @@
 
     <select id="findAll">
         select *
-        from item;
+        from item
         <where>
             <if test="itemName != null and itemName != ''">
-                and item_name like concat('%', #{itemName},'%')
+                and item_name like concat('%',#{itemName},'%')
             </if>
             <if test="maxPrice != null">
-                and price $lt;= #{maxPrice}
+                and price &lt;= #{maxPrice}
             </if>
         </where>
     </select>
