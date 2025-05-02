@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.UnexpectedRollbackException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -72,4 +73,21 @@ class MemberServiceTest {
         Assertions.assertTrue(memberRepository.find(username).isPresent());
         Assertions.assertTrue(logRepository.find(username).isPresent());
     }
+
+
+    @Test
+    void outerTxOn_fail(){
+        // given
+        String username = "로그예외_outerTxOff_fail";
+
+        // when
+        org.assertj.core.api.Assertions
+                .assertThatThrownBy(() ->memberService.joinV1(username)).isInstanceOf(RuntimeException.class);
+
+        // then
+        Assertions.assertTrue(memberRepository.find(username).isEmpty());
+        Assertions.assertTrue(logRepository.find(username).isEmpty());
+    }
+
+
 }
