@@ -60,5 +60,16 @@ class MemberServiceTest {
         Assertions.assertTrue(logRepository.find(username).isPresent());
     }
 
-  
+    @Test
+    void outerTxOn_success(){
+        // given
+        String username = "outerTxOff_success";
+
+        // when
+        memberService.joinV1(username);
+
+        // then
+        Assertions.assertTrue(memberRepository.find(username).isPresent());
+        Assertions.assertTrue(logRepository.find(username).isPresent());
+    }
 }
