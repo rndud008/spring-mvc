@@ -25,7 +25,7 @@ public class HelloTraceV2 {
         Long startTimeMs = System.currentTimeMillis();
 
         // 로그출력
-        log.info("[{}] {}{}", nextId.getId(), addSpace(START_PREFIX, nextId.getLevel() ),message);
+        log.info("[{}] {}{}", nextId.getId(), addSpace(START_PREFIX, nextId.getLevel()),message);
         return new TraceStatus(nextId, startTimeMs, message);
     }
 
