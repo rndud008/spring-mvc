@@ -89,5 +89,17 @@ class MemberServiceTest {
         Assertions.assertTrue(logRepository.find(username).isEmpty());
     }
 
+    @Test
+    void recoverException_fail(){
+        // given
+        String username = "로그예외_recoverException_fail";
 
+        // when
+        org.assertj.core.api.Assertions
+                .assertThatThrownBy(() ->memberService.joinV2(username)).isInstanceOf(UnexpectedRollbackException.class);
+
+        // then
+        Assertions.assertTrue(memberRepository.find(username).isEmpty());
+        Assertions.assertTrue(logRepository.find(username).isEmpty());
+    }
 }
