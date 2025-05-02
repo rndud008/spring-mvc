@@ -1,6 +1,5 @@
-package hello.hellobasic.app.v4.v3;
+package hello.hellobasic.app.v4;
 
-import hello.hellobasic.trace.TraceStatus;
 import hello.hellobasic.trace.logtrace.LogTrace;
 import hello.hellobasic.trace.trace.AbstractTemplate;
 import lombok.RequiredArgsConstructor;
