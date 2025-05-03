@@ -1,10 +1,8 @@
-package hello.hellobasic.app.v5.v4;
+package hello.hellobasic.app.v5;
 
 import hello.hellobasic.trace.callback.TraceCallback;
 import hello.hellobasic.trace.callback.TraceTemplate;
 import hello.hellobasic.trace.logtrace.LogTrace;
-import hello.hellobasic.trace.template.AbstractTemplate;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
