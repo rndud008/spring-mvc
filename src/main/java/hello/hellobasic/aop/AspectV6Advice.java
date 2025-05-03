@@ -1,4 +1,4 @@
-package hello.hellobasic.order.aop;
+package hello.hellobasic.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -31,22 +31,22 @@ public class AspectV6Advice {
 //        }
 //    }
 
-    @Before("hello.hellobasic.order.aop.PointCuts.orderAndService()")
+    @Before("hello.hellobasic.aop.PointCuts.orderAndService()")
     public void doBefore(JoinPoint joinPoint){
         log.info("[before]{}", joinPoint.getSignature());
     }
 
-    @AfterReturning(value = "hello.hellobasic.order.aop.PointCuts.orderAndService()", returning = "result")
+    @AfterReturning(value = "hello.hellobasic.aop.PointCuts.orderAndService()", returning = "result")
     public void doReturn(JoinPoint joinPoint, Object result){
         log.info("[return]{} return={}", joinPoint.getSignature(), result);
     }
 
-    @AfterThrowing(value = "hello.hellobasic.order.aop.PointCuts.orderAndService()", throwing = "ex")
+    @AfterThrowing(value = "hello.hellobasic.aop.PointCuts.orderAndService()", throwing = "ex")
     public void doThrwoing(JoinPoint joinPoint, Exception ex){
         log.info("[ex]{} message={}", ex);
     }
 
-    @After("hello.hellobasic.order.aop.PointCuts.orderAndService()")
+    @After("hello.hellobasic.aop.PointCuts.orderAndService()")
     public void doAfter(JoinPoint joinPoint){
         log.info("[after] {}", joinPoint.getSignature());
     }
