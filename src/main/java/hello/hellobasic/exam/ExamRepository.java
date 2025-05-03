@@ -1,7 +1,7 @@
-package hello.hellobasic.aop.exam;
+package hello.hellobasic.exam;
 
-import hello.hellobasic.aop.exam.annotation.Retry;
-import hello.hellobasic.aop.exam.annotation.Trace;
+import hello.hellobasic.exam.annotation.Retry;
+import hello.hellobasic.exam.annotation.Trace;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,10 +1,9 @@
 package hello.hellobasic.pointcut.exam;
 
-import hello.hellobasic.aop.exam.ExamService;
-import hello.hellobasic.aop.exam.aop.RetryAspect;
-import hello.hellobasic.aop.exam.aop.TraceAspect;
+import hello.hellobasic.exam.ExamService;
+import hello.hellobasic.exam.aop.RetryAspect;
+import hello.hellobasic.exam.aop.TraceAspect;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.annotation.Around;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

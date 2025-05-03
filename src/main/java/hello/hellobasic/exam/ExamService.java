@@ -1,6 +1,6 @@
-package hello.hellobasic.aop.exam;
+package hello.hellobasic.exam;
 
-import hello.hellobasic.aop.exam.annotation.Trace;
+import hello.hellobasic.exam.annotation.Trace;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

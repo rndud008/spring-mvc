@@ -1,4 +1,4 @@
-package hello.hellobasic.aop.exam.annotation;
+package hello.hellobasic.exam.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

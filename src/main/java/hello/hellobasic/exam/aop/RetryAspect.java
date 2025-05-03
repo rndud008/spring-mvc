@@ -1,6 +1,6 @@
-package hello.hellobasic.aop.exam.aop;
+package hello.hellobasic.exam.aop;
 
-import hello.hellobasic.aop.exam.annotation.Retry;
+import hello.hellobasic.exam.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
