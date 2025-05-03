@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 @RequestMapping
 @ResponseBody
-@Controller
+//@Controller
 public class OrderControllerV2 {
 
     private final OrderServiceV2 orderService;
