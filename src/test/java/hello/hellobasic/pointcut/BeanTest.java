@@ -1,6 +1,5 @@
 package hello.hellobasic.pointcut;
 
-import hello.hellobasic.member.MemberService;
 import hello.hellobasic.order.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;

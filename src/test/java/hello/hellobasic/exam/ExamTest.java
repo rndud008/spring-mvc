@@ -1,4 +1,4 @@
-package hello.hellobasic.pointcut.exam;
+package hello.hellobasic.exam;
 
 import hello.hellobasic.exam.ExamService;
 import hello.hellobasic.exam.aop.RetryAspect;
