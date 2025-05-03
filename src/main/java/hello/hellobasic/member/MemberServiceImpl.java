@@ -13,7 +13,7 @@ public class MemberServiceImpl implements MemberService {
         return "ok";
     }
 
-    String internal(String parma){
+    public String internal(String parma){
         return "ok";
     }
 
