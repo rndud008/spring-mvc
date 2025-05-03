@@ -1,0 +1,23 @@
+package hello.hellobasic.order.aop;
+
+import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Pointcut;
+
+@Slf4j
+public class PointCuts {
+    // hello.hellobasic.order 패키지와 하위 패키지
+    @Pointcut("execution(* hello.hellobasic.order..*(..))")
+    public void allOrder(){}
+    // pointcut signature
+
+    // 클래스 이름 패턴이 * Service
+    @Pointcut("execution(* *..*Service.*(..))")
+    public void  allService(){}
+
+
+    @Pointcut("allOrder() && allService()")
+    public void  orderAndService(){}
+
+}
