@@ -1,4 +1,4 @@
-package hello.hellobasic;
+package hello.hellobasic.servlet;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

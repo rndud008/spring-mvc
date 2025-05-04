@@ -1,4 +1,4 @@
-package hello.hellobasic;
+package hello.hellobasic.servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

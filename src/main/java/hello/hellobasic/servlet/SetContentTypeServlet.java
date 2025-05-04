@@ -1,4 +1,4 @@
-package hello.hellobasic;
+package hello.hellobasic.servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,20 +9,20 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "getWriterServlet", urlPatterns = "/getWriter")
-public class GetWriterServlet extends HttpServlet {
+@WebServlet(name = "setContentTypeServlet", urlPatterns = "/setContentType")
+public class SetContentTypeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Content-Type 지정 (평문)
-        response.setContentType("text/plain; charset=UTF-8");
+        // JSON 형태로 응답
+        response.setContentType("application/json; charset=UTF-8");
 
-        // PrintWriter 얻기
         PrintWriter out = response.getWriter();
-
-        out.println("안녕하세요. getWriter() 예제입니다.");
-        out.println("이렇게 텍스트 응답을 보낼 수 있습니다.");
+        out.println("{");
+        out.println("  \"result\": \"ok\",");
+        out.println("  \"message\": \"JSON 응답 예시\"");
+        out.println("}");
     }
 }

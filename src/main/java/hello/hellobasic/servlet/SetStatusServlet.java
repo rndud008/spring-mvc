@@ -1,4 +1,4 @@
-package hello.hellobasic;
+package hello.hellobasic.servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,19 +8,18 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "setHeaderServlet", urlPatterns = "/setHeader")
-public class SetHeaderServlet extends HttpServlet {
+@WebServlet(name = "setStatusServlet", urlPatterns = "/setStatus")
+public class SetStatusServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Cache-Control 헤더를 no-cache로 설정
-        response.setHeader("X-Custom-Header", "X-Custom-Value1");
-        response.setHeader("X-Custom-Header", "X-Custom-Value2");
+        // 200 OK 로 설정
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 
-        // 응답 바디
+        // 브라우저에 메시지 전송
         response.setContentType("text/plain; charset=UTF-8");
-        response.getWriter().println("X-Custom-Header: X-Custom-Value 헤더가 설정되었습니다.");
+        response.getWriter().println("HTTP Status를 403 FORBIDDEN  설정했습니다.");
     }
 }
