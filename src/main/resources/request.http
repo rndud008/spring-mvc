@@ -1,8 +1,57 @@
 ### Send POST request with body as parameters
-POST http://localhost:8081/users/springmvc:a@a.com
+POST http://localhost:8081/param
+Content-Type: application/json
+
+{
+  "username": "springmvc",
+  "email": "a@a.com"
+}
 
 ### Send POST request with body as parameters
-POST http://localhost:8081/users
-Content-Type: application/x-www-form-urlencoded
+POST http://localhost:8081/model
+Content-Type: application/json
 
-my-name=springmvc&my-email=a@a.com
+{
+  "username": "springmvc",
+  "email": "a@a.com"
+}
+
+### Send POST request with body as parameters
+POST http://localhost:8081/readbody
+Content-Type: application/json
+
+{
+  "username": "springmvc",
+  "email": "a@a.com"
+}
+
+### Send POST request with body as parameters
+POST http://localhost:8081/httpEntity1
+Content-Type: application/json
+
+{
+  "username": "springmvc",
+  "email": "a@a.com"
+}
+
+### Send POST request with body as parameters
+POST http://localhost:8081/httpEntity2
+Content-Type: application/json
+
+{
+  "username": "springmvc",
+  "email": "a@a.com"
+}
+
+### Send POST request with body as parameters
+POST http://localhost:8081/requestEntity1
+Content-Type: application/json
+
+{
+  "username": "springmvc",
+  "email": "a@a.com"
+}
+
+### Send POST request with body as parameters
+POST http://localhost:8081/requestEntity2
+Content-Type: application/json
