@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SuccessPage</title>
+</head>
+<body>
+<!-- 플래시 속성에서 메시지를 읽어와 표시 -->
+<div th:if="${flashMessage}">
+    <p>FlashMessage: <span th:text="${flashMessage}"></span></p>
+</div>
+</body>
+</html>
