@@ -4,12 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Member List - Model2</title>
+    <title>Member List - FrontController</title>
 </head>
 <body>
-<h1>Member List (Model2)</h1>
+<h1>Member List (FrontController)</h1>
 <%
-    List<Member> memberList = (List<Member>) application.getAttribute("members");
+    List<Member> memberList = (List<Member>) request.getAttribute("members");
     if (memberList == null) {
         memberList = List.of();
     }
@@ -23,6 +23,6 @@
         }
     %>
 </ul>
-<a href="/model2/registerForm">Go to Register Form</a>
+<a href="/front-controller/members/new-form">Go to Register Form</a>
 </body>
 </html>
