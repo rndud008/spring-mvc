@@ -1,5 +1,5 @@
 ### Send POST request with json body
-POST http://localhost:8080/restTest
+POST http://localhost:8081/restTest
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Send POST request with json body
-POST http://localhost:8080/restTest
+POST http://localhost:8081/restTest
 Content-Type: text/plain
 
 name=springmvc,

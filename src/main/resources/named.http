@@ -1,0 +1,5 @@
+### GET request to example server
+GET http://localhost:8081/noNamed?username=springmvc
+
+### GET request to example server
+GET http://localhost:8081/noRequestParam?username=springmvc

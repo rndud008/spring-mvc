@@ -1,0 +1,6 @@
+### GET request to example server
+#GET http://localhost:8081/primitive?number=42
+GET http://localhost:8081/primitive?number=
+
+### GET request to example server
+GET http://localhost:8081/primitiveDefault?number=

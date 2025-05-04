@@ -1,19 +1,19 @@
 ### GET request to example server
-GET http://localhost:8080/api/text
+GET http://localhost:8081/api/text
 Content-Type: text/plain
 
 ### GET request to example server
-GET http://localhost:8080/api/json
+GET http://localhost:8081/api/json
 Content-Type: application/json
 
 ### GET request to example server
-GET http://localhost:8080/api/notJson
+GET http://localhost:8081/api/notJson
 Content-Type: application/json
 
 ### GET request to example server
-GET http://localhost:8080/api/notJson
+GET http://localhost:8081/api/notJson
 Content-Type: text/plain
 
 ### GET request to example server
-GET http://localhost:8080/api/myHeader
+GET http://localhost:8081/api/myHeader
 My-Header: myValue

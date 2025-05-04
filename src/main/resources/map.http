@@ -1,0 +1,5 @@
+### GET request to example server
+GET http://localhost:8081/map?key1=value1&key2=value2
+
+### GET request to example server
+GET http://localhost:8081/multivalueMap?key1=value1&key1=value2

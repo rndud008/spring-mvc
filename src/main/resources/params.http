@@ -1,5 +1,5 @@
 ### GET request to example server
-GET http://localhost:8080/api/order?type=pizza
+GET http://localhost:8081/api/order?type=pizza
 
 ### GET request to example server
-GET http://localhost:8080/api/order?type=chicken
+GET http://localhost:8081/api/order?type=chicken
