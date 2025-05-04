@@ -1,5 +1,5 @@
 ### Send POST request with body as parameters
-POST http://localhost:8081/param
+POST http://localhost:8081/httpEntity
 Content-Type: application/json
 
 {
@@ -8,7 +8,23 @@ Content-Type: application/json
 }
 
 ### Send POST request with body as parameters
-POST http://localhost:8081/model
+POST http://localhost:8081/requestBody
+Content-Type: application/json
+
+{
+  "username": "springmvc",
+  "email": "a@a.com"
+}
+
+
+### Send POST request with body as parameters
+POST http://localhost:8081/text
+Content-Type: text/plain
+
+springmvc
+
+### Send POST request with body as parameters
+POST http://localhost:8081/notRequestBody
 Content-Type: application/json
 
 {
@@ -17,41 +33,9 @@ Content-Type: application/json
 }
 
 ### Send POST request with body as parameters
-POST http://localhost:8081/readbody
+POST http://localhost:8081/noData
 Content-Type: application/json
 
-{
-  "username": "springmvc",
-  "email": "a@a.com"
-}
-
 ### Send POST request with body as parameters
-POST http://localhost:8081/httpEntity1
-Content-Type: application/json
-
-{
-  "username": "springmvc",
-  "email": "a@a.com"
-}
-
-### Send POST request with body as parameters
-POST http://localhost:8081/httpEntity2
-Content-Type: application/json
-
-{
-  "username": "springmvc",
-  "email": "a@a.com"
-}
-
-### Send POST request with body as parameters
-POST http://localhost:8081/requestEntity1
-Content-Type: application/json
-
-{
-  "username": "springmvc",
-  "email": "a@a.com"
-}
-
-### Send POST request with body as parameters
-POST http://localhost:8081/requestEntity2
+POST http://localhost:8081/required
 Content-Type: application/json
