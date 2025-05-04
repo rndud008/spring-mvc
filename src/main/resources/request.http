@@ -1,6 +1,7 @@
 ### Send POST request with body as parameters
-POST http://localhost:8081/httpEntity
+POST http://localhost:8081/json
 Content-Type: application/json
+Accept: application/json
 
 {
   "username": "springmvc",
@@ -8,34 +9,24 @@ Content-Type: application/json
 }
 
 ### Send POST request with body as parameters
-POST http://localhost:8081/requestBody
-Content-Type: application/json
+POST http://localhost:8081/form
+Content-Type: application/x-www-form-urlencoded
 
-{
-  "username": "springmvc",
-  "email": "a@a.com"
-}
-
+username=springmvc&email=a@a.com&email=b@b.com
 
 ### Send POST request with body as parameters
-POST http://localhost:8081/text
+GET http://localhost:8081/noBody
 Content-Type: text/plain
 
+#springmvc 본문이 없으면 오류 발생, 본문이 있을 경우 표준에는 위배되나 스프링이 처리해 주고는 있음
+
+### Send POST request with body as parameters
+POST http://localhost:8081/jsonOnly
+Content-Type: text/csv
+
+### Send POST request with body as parameters
+POST http://localhost:8081/noResponseBody
+Content-Type: text/plain
+Accept: text/plain
+
 springmvc
-
-### Send POST request with body as parameters
-POST http://localhost:8081/notRequestBody
-Content-Type: application/json
-
-{
-  "username": "springmvc",
-  "email": "a@a.com"
-}
-
-### Send POST request with body as parameters
-POST http://localhost:8081/noData
-Content-Type: application/json
-
-### Send POST request with body as parameters
-POST http://localhost:8081/required
-Content-Type: application/json
