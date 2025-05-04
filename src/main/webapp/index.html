@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HttpServletResponse API 예제</title>
+    <style>
+        /* 리스트 아이템 사이 간격을 10px 추가 */
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>HttpServletResponse 주요 메서드</h1>
+<ul>
+    <li>
+        <a href="/setStatus">setStatus(int sc)</a>
+        <small>HTTP 상태 코드를 200 OK로 설정</small>
+    </li>
+    <li>
+        <a href="/sendError">sendError(int sc, String msg)</a>
+        <small>404 에러 페이지 전송</small>
+    </li>
+    <li>
+        <a href="/setHeader">setHeader(String name, String value)</a>
+        <small>단일 헤더 설정 (덮어쓰기)</small>
+    </li>
+    <li>
+        <a href="/addHeader">addHeader(String name, String value)</a>
+        <small>동일한 이름의 헤더 여러 개 추가</small>
+    </li>
+    <li>
+        <a href="/setContentType">setContentType(String type)</a>
+        <small>Content-Type을 JSON 등으로 지정</small>
+    </li>
+    <li>
+        <a href="/getWriter">getWriter()</a>
+        <small>텍스트 응답 작성 (PrintWriter)</small>
+    </li>
+    <li>
+        <a href="/redirect">sendRedirect(String location)</a>
+        <small>클라이언트에게 특정 경로로 리다이렉트 지시</small>
+    </li>
+    <li>
+        <a href="/addCookie">addCookie(Cookie cookie)</a>
+        <small>쿠키 설정 후 전송</small>
+    </li>
+</ul>
+</body>
+</html>
