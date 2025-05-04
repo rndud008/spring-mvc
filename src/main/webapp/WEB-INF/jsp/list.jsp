@@ -1,15 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="hello.hellobasic.Member" %>
+<%@ page import="hello.hellobasic.model.Member" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Member List - Model1</title>
+    <title>Member List - Model2</title>
 </head>
 <body>
-<h1>Member List (Model1)</h1>
+<h1>Member List (Model2)</h1>
 <%
-    List<Member> memberList = (List<Member>) application.getAttribute("memberList");
+    List<Member> memberList = (List<Member>) application.getAttribute("members");
     if (memberList == null) {
         memberList = List.of();
     }
@@ -23,6 +23,6 @@
         }
     %>
 </ul>
-<a href="/model1/registerForm.jsp">Go to Register Form</a>
+<a href="/model2/registerForm">Go to Register Form</a>
 </body>
 </html>

@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register Form - Model1</title>
+    <title>Register Form - Model2</title>
 </head>
 <body>
-<h1>Register Form (Model1)</h1>
-<form action="/model1/register.jsp" method="post">
+<h1>Register Form (Model2)</h1>
+<form action="/model2/register" method="post">
     Username: <input type="text" name="username"><br>
     Password: <input type="password" name="password"><br>
     <button type="submit">Register</button>

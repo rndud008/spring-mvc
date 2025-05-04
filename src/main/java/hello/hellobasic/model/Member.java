@@ -1,4 +1,4 @@
-package hello.hellobasic;
+package hello.hellobasic.model;
 
 public class Member {
     private String username;
