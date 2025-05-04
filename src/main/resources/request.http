@@ -1,0 +1,12 @@
+### GET request to example server
+GET http://localhost:8081/webRequest?name=springmvc
+X-Custom-Header: CustomValue
+
+### GET request to example server
+POST http://localhost:8081/params
+Content-Type: application/json
+
+{
+  "message": "content",
+  "count": 1
+}
