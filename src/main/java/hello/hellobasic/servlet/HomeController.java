@@ -11,7 +11,7 @@ import java.io.IOException;
 @RestController
 public class HomeController {
 
-    @GetMapping("/home")
+//    @GetMapping("/home")
     public String home(HttpServletRequest request, HttpServletResponse response){
 
         return "home";
