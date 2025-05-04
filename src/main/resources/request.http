@@ -1,21 +1,8 @@
-### GET request to example server
-GET http://localhost:8081/resources/image.png
+### Send POST request with body as parameters
+POST http://localhost:8081/users/springmvc:a@a.com
 
-### GET request to example server
-GET http://localhost:8081/resources/abcd.png
+### Send POST request with body as parameters
+POST http://localhost:8081/users
+Content-Type: application/x-www-form-urlencoded
 
-### GET request to example server
-GET http://localhost:8081/resources/abcd
-
-### GET request to example server
-GET http://localhost:8081/projects/myProject
-
-### GET request to example server
-POST http://localhost:8081/projects/myProject/versions/1.0
-
-### GET request to example server
-GET http://localhost:8081/projects/abcd/details
-#GET http://localhost:8081/projects/ABCD/details
-
-### GET request to example server
-GET http://localhost:8081/users/123
+my-name=springmvc&my-email=a@a.com
