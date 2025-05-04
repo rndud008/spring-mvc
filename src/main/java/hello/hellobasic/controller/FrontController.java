@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "frontController", urlPatterns = "/front-controller/*")
+//@WebServlet(name = "frontController", urlPatterns = "/front-controller/*")
 public class FrontController extends HttpServlet {
 
     private Map<String , Controller> controllerMap = new HashMap<>();
