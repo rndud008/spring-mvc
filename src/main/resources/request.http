@@ -1,40 +1,21 @@
 ### GET request to example server
-GET http://localhost:8081/greet?username=springmvc
-
-### POST request to example server
-POST http://localhost:8081/greet
-Content-Type: application/x-www-form-urlencoded
-
-username = springmvc
+GET http://localhost:8081/resources/image.png
 
 ### GET request to example server
-GET http://localhost:8081/requiredTrue?username=springmvc
-#GET http://localhost:8081/requiredTrue?username=
-#GET http://localhost:8081/requiredTrue
+GET http://localhost:8081/resources/abcd.png
 
 ### GET request to example server
-GET http://localhost:8081/requiredFalse?username=springmvc
-#GET http://localhost:8081/requiredFalse
+GET http://localhost:8081/resources/abcd
 
 ### GET request to example server
-GET http://localhost:8081/defaultValue?username=springmvc
-#GET http://localhost:8081/defaultValue
+GET http://localhost:8081/projects/myProject
 
 ### GET request to example server
-GET http://localhost:8081/named?username=springmvc
+POST http://localhost:8081/projects/myProject/versions/1.0
 
 ### GET request to example server
-GET http://localhost:8081/noNamed?username=springmvc
+GET http://localhost:8081/projects/abcd/details
+#GET http://localhost:8081/projects/ABCD/details
 
 ### GET request to example server
-GET http://localhost:8081/primitive?number=42
-#GET http://localhost:8081/primitive?number=
-
-### GET request to example server
-GET http://localhost:8081/primitiveDefault?number=
-
-### GET request to example server
-GET http://localhost:8081/map?key1=value1&key2=value2
-
-### GET request to example server
-GET http://localhost:8081/multivalueMap?key1=value1&key1=value2
+GET http://localhost:8081/users/123
