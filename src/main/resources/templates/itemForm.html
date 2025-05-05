@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency Form</title>
+</head>
+<body>
+<h2>Enter Details</h2>
+<form th:action="@{/item}" th:object="${item}" method="post">
+    <label for="price">Price:</label>
+    <input type="text" id="price" name="price" th:field="*{price}" />
+    <br>
+    <label for="discount">Discount:</label>
+    <input type="text" id="discount" name="discount" th:field="*{discount}" />
+    <br>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

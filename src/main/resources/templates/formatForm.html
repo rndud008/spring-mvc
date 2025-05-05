@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency Form</title>
+</head>
+<body>
+<h2>Enter Details</h2>
+<form th:action="@{/submit}" th:object="${myModel}" method="post">
+    <label for="price">Price (Currency):</label>
+    <input type="text" id="price" name="price" th:field="*{price}" />
+    <br>
+    <label for="date">Purchase Date (yyyy-MM-dd):</label>
+    <input type="text" id="date" name="date" th:field="*{date}" />
+    <br>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
