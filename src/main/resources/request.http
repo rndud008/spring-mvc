@@ -2,22 +2,27 @@
 POST http://localhost:8081/users1
 Content-Type: application/x-www-form-urlencoded
 
-username=&age=101
+username=sp&email=@a.com&age=-1
 
-### Send POST request with body as parameters
+### Send POST request with json body
 POST http://localhost:8081/users2
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
-username=springmvc&age=10&level=0
+{
+  "username": "springmvc",
+  "email": "a@a.com",
+  "age": -1
+}
+###  "age": "aa" 빈 검증이 이루어지지 않는다
 
 ### Send POST request with body as parameters
-POST http://localhost:8081/users3
+POST http://localhost:8081/createUser
 Content-Type: application/x-www-form-urlencoded
 
-username=&age=10&level=0
+username=&email=10
 
 ### Send POST request with body as parameters
-POST http://localhost:8081/users4
+POST http://localhost:8081/updateUser
 Content-Type: application/x-www-form-urlencoded
 
-username=springmvc&age=10&level=0
+username=&email=10
