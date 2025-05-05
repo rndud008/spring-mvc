@@ -2,18 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Currency Form</title>
+    <title>회원 가입</title>
 </head>
 <body>
-<h2>Enter Details</h2>
+<h1>회원 가입</h1>
+
 <form th:action="@{/item}" th:object="${item}" method="post">
-    <label for="price">Price:</label>
-    <input type="text" id="price" name="price" th:field="*{price}" />
-    <br>
-    <label for="discount">Discount:</label>
-    <input type="text" id="discount" name="discount" th:field="*{discount}" />
-    <br>
-    <button type="submit">Submit</button>
+    <!-- 글로벌 오류 (ObjectError) 출력 -->
+    <div th:if="${#fields.hasGlobalErrors()}">
+        <p th:each="error : ${#fields.globalErrors()}" th:text="${error}">글로벌 오류 메시지</p>
+    </div>
+    <!-- 상품명 -->
+    <label>상품명: <input type="text" th:field="*{itemName}" /></label>
+    <span th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}">상품명 오류</span><br/>
+
+    <!-- 가격 -->
+    <label>가격: <input type="text" th:field="*{price}" /></label>
+    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">가격 오류</span><br/>
+
+    <button type="submit">제출</button>
 </form>
 </body>
 </html>
