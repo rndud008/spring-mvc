@@ -8,9 +8,6 @@
     <label>상품명: <input type="text" id="item" th:field="*{item}"/></label>
     <span th:if="${#fields.hasErrors('item')}" th:errors="*{item}">상품명 오류</span><br/>
 
-    <label>수량: <input type="text" id="quantity" th:field="*{quantity}"/></label>
-    <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">수량 오류</span><br/>
-
     <label>가격: <input type="text" id="price" th:field="*{price}"/></label>
     <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">수량 오류</span><br/>
 

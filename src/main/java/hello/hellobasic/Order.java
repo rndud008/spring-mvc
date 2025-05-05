@@ -6,5 +6,4 @@ import lombok.Data;
 public class Order {
     private String item;
     private int price;
-    private int quantity;
 }
