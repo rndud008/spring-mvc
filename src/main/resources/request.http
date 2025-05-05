@@ -1,5 +1,11 @@
 ### Send POST request with body as parameters
-POST http://localhost:8081/user
-Content-Type: application/x-www-form-urlencoded
+GET http://localhost:8081/customView
+Accept: application/json
 
-password=Springmvc123
+### Send POST request with body as parameters
+GET http://localhost:8081/user1
+Content-Type: application/json
+
+### Send POST request with body as parameters
+GET http://localhost:8081/user2
+Content-Type: application/json
