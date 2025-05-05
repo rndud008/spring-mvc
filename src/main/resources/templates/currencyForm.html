@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency Form</title>
+</head>
+<body>
+<h2>Enter Amount</h2>
+<form th:action="@{/currency}" method="post">
+    <label for="amount">Enter Amount:</label>
+    <input type="text" id="amount" name="amount" th:value="${{amount}}" />
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
