@@ -1,6 +1,10 @@
 ### Send POST request with body as parameters
-POST http://localhost:8081/model
+POST http://localhost:8081/binder
 Content-Type: application/x-www-form-urlencoded
 
+id = 1 &
 username = springmvc &
 email = a@a.com
+
+### Send POST request with body as parameters
+GET http://localhost:8081/users/1&springmvc&a@a.com
