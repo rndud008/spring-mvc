@@ -1,28 +1,28 @@
 package hello.hellobasic;
 
 
-import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@RestController
+@Controller
 public class BindingResultController {
 
-    @PostMapping("/validation")
-    public User validation(@ModelAttribute User user, BindingResult bindingResult, Model model) {
+    @PostMapping("/users")
+    @ResponseBody
+    public User registerUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
+        if(!StringUtils.hasText(user.getUsername())) {
+            bindingResult.addError(new FieldError("user", "username", "사용자 이름은 필수입니다."));
+        }
+
+        if(!StringUtils.hasText(user.getUsername()) && user.getAge() < 1) {
+            bindingResult.addError(new ObjectError("user",  "사용자 정보가 잘못 되었습니다."));
+        }
         return user;
     }
-
-    @PostMapping("/nonValidation")
-    public User nonValidation(@ModelAttribute User user) {
-        return user;
-    }
-
-    @PostMapping("/validation2")
-    public User validation2(@ModelAttribute User user, BindingResult bindingResult) {
-        return user;
-    }
-
 }
