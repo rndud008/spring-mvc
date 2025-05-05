@@ -1,4 +1,4 @@
-package hello.hellobasic;
+package hello.hellobasic.converter;
 
 import org.springframework.core.convert.converter.Converter;
 

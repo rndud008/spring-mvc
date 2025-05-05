@@ -1,4 +1,4 @@
-package hello.hellobasic;
+package hello.hellobasic.converter;
 
 import org.springframework.core.convert.converter.Converter;
 
@@ -15,6 +15,6 @@ public class StringToUrlConverter implements Converter<String, Url> {
         String[] parts2 = domainPort.split(":");
         String domain = parts2[0];
         int port = Integer.parseInt(parts2[1]);
-        return new Url(protocol, domain, port);
+        return new Url(protocol, domain, port, new IpAddress("127.0.0.1"));
     }
 }
