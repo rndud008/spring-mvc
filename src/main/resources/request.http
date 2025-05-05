@@ -1,14 +1,8 @@
 ### Send POST request with body as parameters
-POST http://localhost:8081/submitDate
+POST http://localhost:8081/url
 Content-Type: application/x-www-form-urlencoded
 
-date=2025-03-10
-#date=2025/03/10
+protocol=http&domain=www.springmvc.com&port=8081
 
-### Send POST request with body as parameters
-POST http://localhost:8081/users
-Content-Type: application/x-www-form-urlencoded
-
-username = springmvc &
-email = a@a.com &
-password =1234
+### Send GET request
+GET http://localhost:8081/url?url=http://www.springmvc.com:8081
