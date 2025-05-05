@@ -1,6 +1,23 @@
-
 ### Send POST request with body as parameters
-POST http://localhost:8081/users
+POST http://localhost:8081/users1
 Content-Type: application/x-www-form-urlencoded
 
-username=&age=ten
+username=&age=101
+
+### Send POST request with body as parameters
+POST http://localhost:8081/users2
+Content-Type: application/x-www-form-urlencoded
+
+username=springmvc&age=10&level=0
+
+### Send POST request with body as parameters
+POST http://localhost:8081/users3
+Content-Type: application/x-www-form-urlencoded
+
+username=&age=10&level=0
+
+### Send POST request with body as parameters
+POST http://localhost:8081/users4
+Content-Type: application/x-www-form-urlencoded
+
+username=springmvc&age=10&level=0
