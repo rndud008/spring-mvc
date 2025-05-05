@@ -1,6 +1,5 @@
 package hello.hellobasic;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -24,11 +23,14 @@ public class OrderController {
 
         // 필드 오류 검증 (productName)
         if (!StringUtils.hasText(order.getItem())) {
-            result.addError(new FieldError("order", "item", "상품명은 필수입니다."));
+            result.addError(new FieldError("order", "item", order.getItem(), false, null, null,  "상품명은 필수입니다."));
         }
         // 필드 오류 검증 (quantity)
         if (order.getQuantity() <= 10) {
-            result.addError(new FieldError("order", "quantity", "수량은 10보다 커야 합니다."));
+            result.addError(new FieldError("order", "quantity", order.getQuantity(), false, null, null, "수량은 10보다 커야 합니다."));
+        }
+        if (order.getPrice() < 1000 || order.getPrice() > 1_000_000) {  // 가격 범위 제한: 1 ~ 1,000,000)
+            result.addError(new FieldError("order", "price",  order.getPrice(), false, null, null, "가격은 1000 이상 1,000,000 이하여야 합니다."));
         }
         // 객체 수준 오류
         if (!StringUtils.hasText(order.getItem()) && (order. getQuantity() <= 10)) {
@@ -39,4 +41,5 @@ public class OrderController {
         }
         return "orderForm";
     }
+
 }

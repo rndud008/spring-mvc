@@ -11,6 +11,9 @@
     <label>수량: <input type="text" id="quantity" th:field="*{quantity}"/></label>
     <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">수량 오류</span><br/>
 
+    <label>가격: <input type="text" id="price" th:field="*{price}"/></label>
+    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">수량 오류</span><br/>
+
     <!-- 객체 수준 오류 -->
     <div th:if="${#fields.hasGlobalErrors()}">
         <p th:each="error : ${#fields.globalErrors()}" th:text="${error}">글로벌 오류</p>
