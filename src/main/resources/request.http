@@ -1,11 +1,19 @@
 ### Send POST request with body as parameters
-GET http://localhost:8081/customView
-Accept: application/json
-
-### Send POST request with body as parameters
-GET http://localhost:8081/user1
+GET http://localhost:8081/body4
 Content-Type: application/json
 
+{
+  "id": 1,
+  "username": "springmvc1",
+  "age": 10
+}
+
 ### Send POST request with body as parameters
-GET http://localhost:8081/user2
+POST http://localhost:8081/users2
 Content-Type: application/json
+
+{
+  "id": 2,
+  "username": "springmvc2",
+  "age": 100
+}
