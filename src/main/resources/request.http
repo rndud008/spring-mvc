@@ -1,10 +1,14 @@
 ### Send POST request with body as parameters
-POST http://localhost:8081/binder
+POST http://localhost:8081/submitDate
 Content-Type: application/x-www-form-urlencoded
 
-id = 1 &
-username = springmvc &
-email = a@a.com
+date=2025-03-10
+#date=2025/03/10
 
 ### Send POST request with body as parameters
-GET http://localhost:8081/users/1&springmvc&a@a.com
+POST http://localhost:8081/users
+Content-Type: application/x-www-form-urlencoded
+
+username = springmvc &
+email = a@a.com &
+password =1234
