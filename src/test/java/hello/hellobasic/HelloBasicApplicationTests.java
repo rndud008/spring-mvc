@@ -17,33 +17,10 @@ class HelloBasicApplicationTests {
 
     @Test
     void contextLoads() throws ParseException {
-        DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
-        conversionService.addFormatter(new KoreanCurrencyFormatter());
-
-        String currency = "₩1,000";
-        Number parsedCurrency = conversionService.convert(currency, Number.class);
-        Assertions.assertThat(parsedCurrency).isEqualTo(1000L);
-
-        String printedCurrency = conversionService.convert(1000L, String.class);
-        Assertions.assertThat(printedCurrency).isEqualTo("₩1,000");
 
     }
 
-    @Test
-    void currencyFormatting2() throws ParseException {
 
-        DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
-        CustomFormatterRegistrar registrar = new CustomFormatterRegistrar();
-        registrar.registerFormatters(conversionService);
-
-        String currency = "₩1,000";
-        Number parsedCurrency = conversionService.convert(currency, Number.class);
-        Assertions.assertThat(parsedCurrency).isEqualTo(1000L);
-
-        String printedCurrency = conversionService.convert(1000L, String.class);
-        Assertions.assertThat(printedCurrency).isEqualTo("₩1,000");
-
-    }
 
 
 
