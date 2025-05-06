@@ -1,51 +1,87 @@
 package hello.hellobasic;
 
-
-import jakarta.validation.*;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.format.support.DefaultFormattingConversionService;
-import org.springframework.validation.DefaultMessageCodesResolver;
-
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Set;
 
 @SpringBootTest
 class HelloBasicApplicationTests {
 
     @Test
-    void contextLoads() throws ParseException {
-//        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-//        Validator validator = validatorFactory.getValidator();
-//
-//        User user = new User();
-//        user.setUsername("ab");
-//        user.setEmail("abcdefg");
-//        user.setAge(-1);
-//
-//        Set<ConstraintViolation<User>> violations = validator.validate(user);
-//        Assertions.assertThat(3).isEqualTo(violations.size());
-//
-//        for (ConstraintViolation<User> violation : violations) {
-//            Path propertyPath = violation.getPropertyPath();
-//            String message = violation.getMessage();
-//
-//            if(propertyPath.equals("username")){
-//                Assertions.assertThat("사용자명은 3~15 길이어야 합니다.").isEqualTo(message);
-//            }else if(propertyPath.equals("email")){
-//                Assertions.assertThat("이메일 형식이 맞지 않습니다.").isEqualTo(message);
-//            }else if(propertyPath.equals("age")){
-//                Assertions.assertThat("나이는 0 보다 커야 합니다.").isEqualTo(message);
-//            }
-//        }
-        
-        
+    void testInvalidUser() throws ClassNotFoundException {
+        Class<?> clazz = Class.forName("java.util.ArrayList");
+        //Class<?> clazz = ArrayList.class
+        //Class<?> clazz = new ArrayList().getClass();
+
+        System.out.println("클래스명: " + clazz.getName());
+        System.out.println("부모 클래스: " + clazz.getSuperclass());
+
+        System.out.println("인터페이스");
+        for (Class<?> inf : clazz.getInterfaces()) {
+            System.out.println("  " + inf.getName());
+        }
+    }
+
+    @Test
+    void testConstructor() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        Class<?> clazz = User.class;
+
+        // 생성자 호출
+        Constructor<?> constructor = clazz.getConstructor(String.class, int.class);
+        Object[] args = new Object[]{"springmvc",10};
+        User user = (User) constructor.newInstance(args);
+
+        System.out.println("Created User: " + user);
+
+    }
+
+    @Test
+    void testField() throws IllegalAccessException, NoSuchFieldException {
+        User user = new User();
+        Class<?> clazz = user.getClass();
+
+        for (Field field : clazz.getDeclaredFields()) {
+            field.setAccessible(true); // private 필드 접근 허용
+            System.out.println("필드명: " + field.getName());
+            System.out.println("필드값: " + field.get(user));
+
+            if (field.getType() == String.class) {
+                field.set(user, "springmvc");
+            }
+        }
+        Field usernameField = clazz.getDeclaredField("username");
+        usernameField.setAccessible(true);
+        System.out.println("수정된 username: " + usernameField.get(user));
+    }
+
+    @Test
+    void testMethod() throws IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException {
+
+        Class<?> clazz = Class.forName("hello.hellobasic.User");
+        Object userInstance = clazz.getDeclaredConstructor().newInstance();
+        System.out.println("Before user: " + userInstance);
+
+        // setName 메서드 호출
+        Method setName = clazz.getDeclaredMethod("setUsername", String.class);
+        setName.invoke(userInstance, "springmvc");
+
+        // setAge 메서드 호출
+        Method setAge = clazz.getDeclaredMethod("setAge", int.class);
+        setAge.invoke(userInstance, 25);
+
+        // getName 메서드 호출
+        Method getName = clazz.getDeclaredMethod("getUsername");
+        getName.invoke(userInstance);
+
+        // getAge 메서드 호출
+        Method getAge = clazz.getDeclaredMethod("getAge");
+        getAge.invoke(userInstance);
+
+        System.out.println("After user: " + userInstance);
     }
 
 
