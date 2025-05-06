@@ -1,5 +1,8 @@
 package hello.hellobasic;
 
+import hello.hellobasic.core.ReflectionExecutor;
+import hello.hellobasic.core.ReflectionFieldManager;
+import hello.hellobasic.core.ReflectionMethodManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.lang.reflect.Constructor;
@@ -7,87 +10,57 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.ParseException;
+import java.util.Map;
 
 @SpringBootTest
 class HelloBasicApplicationTests {
 
     @Test
-    void testInvalidUser() throws ClassNotFoundException {
-        Class<?> clazz = Class.forName("java.util.ArrayList");
-        //Class<?> clazz = ArrayList.class
-        //Class<?> clazz = new ArrayList().getClass();
+    void testReflection() throws Exception {
 
-        System.out.println("클래스명: " + clazz.getName());
-        System.out.println("부모 클래스: " + clazz.getSuperclass());
+        Class<?> userClass = Class.forName("hello.hellobasic.User");
+        Constructor<?> declaredConstructor = userClass.getDeclaredConstructor(Long.class, String.class, String.class);
+        Object user = declaredConstructor.newInstance(1L, "springmvc", "a@a.com");
 
-        System.out.println("인터페이스");
-        for (Class<?> inf : clazz.getInterfaces()) {
-            System.out.println("  " + inf.getName());
-        }
-    }
+        ReflectionExecutor reflectionExecutor = new ReflectionExecutor(userClass);
+        ReflectionFieldManager fieldManager = reflectionExecutor.getFieldManager();
+        fieldManager.setFieldValue(user, "username", "springboot" );
 
-    @Test
-    void testConstructor() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        Class<?> clazz = User.class;
+        ReflectionMethodManager methodManager = reflectionExecutor.getMethodManager();
+        methodManager.invokeMethod(user, "setEmail", "springmvc@gmail.com");
 
-        // 생성자 호출
-        Constructor<?> constructor = clazz.getConstructor(String.class, int.class);
-        Object[] args = new Object[]{"springmvc",10};
-        User user = (User) constructor.newInstance(args);
+        Object id = fieldManager.getFieldValue(user, "id");
+        Object username = fieldManager.getFieldValue(user, "username");
+        Object email = fieldManager.getFieldValue(user, "email");
 
-        System.out.println("Created User: " + user);
+        System.out.println("id = " + id);
+        System.out.println("username = " + username);
+        System.out.println("email = " + email);
 
     }
 
     @Test
-    void testField() throws IllegalAccessException, NoSuchFieldException {
-        User user = new User();
-        Class<?> clazz = user.getClass();
+    void testReflection2() throws Exception {
 
-        for (Field field : clazz.getDeclaredFields()) {
-            field.setAccessible(true); // private 필드 접근 허용
-            System.out.println("필드명: " + field.getName());
-            System.out.println("필드값: " + field.get(user));
+        DomainRepository<User> userRepository = new DomainRepository<>(User.class, "id");
+        Map<String, Object> userData = Map.of("id", 1L, "username", "springboot", "email", "springmvc@gmail.com");
+        User user = userRepository.save(userData);
+        System.out.println("user = " + user);
 
-            if (field.getType() == String.class) {
-                field.set(user, "springmvc");
-            }
-        }
-        Field usernameField = clazz.getDeclaredField("username");
-        usernameField.setAccessible(true);
-        System.out.println("수정된 username: " + usernameField.get(user));
+        userRepository.invoke(1L, "setProfile", user.getId() + ": " + user.getUsername() + ":" + user.getEmail());
+
+        System.out.println("profile = " + userRepository.getExecutor().getFieldManager().getFieldValue(user, "profile"));
+
+        DomainRepository<Item> itemRepository = new DomainRepository<>(Item.class, "id");
+        Map<String, Object> itemData = Map.of("code", 1L, "name", "springboot", "price", 10000);
+        Item item = itemRepository.save(itemData);
+        System.out.println("item = " + item);
+
+        itemRepository.invoke(1L, "disCount", 1000);
+
+        System.out.println("profile = " + itemRepository.getExecutor().getFieldManager().getFieldValue(item, "price"));
+
+
+
     }
-
-    @Test
-    void testMethod() throws IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException {
-
-        Class<?> clazz = Class.forName("hello.hellobasic.User");
-        Object userInstance = clazz.getDeclaredConstructor().newInstance();
-        System.out.println("Before user: " + userInstance);
-
-        // setName 메서드 호출
-        Method setName = clazz.getDeclaredMethod("setUsername", String.class);
-        setName.invoke(userInstance, "springmvc");
-
-        // setAge 메서드 호출
-        Method setAge = clazz.getDeclaredMethod("setAge", int.class);
-        setAge.invoke(userInstance, 25);
-
-        // getName 메서드 호출
-        Method getName = clazz.getDeclaredMethod("getUsername");
-        getName.invoke(userInstance);
-
-        // getAge 메서드 호출
-        Method getAge = clazz.getDeclaredMethod("getAge");
-        getAge.invoke(userInstance);
-
-        System.out.println("After user: " + userInstance);
-    }
-
-
-
-
-
-
-
 }
