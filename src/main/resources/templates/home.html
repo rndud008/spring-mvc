@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
-<h1>Welcome to home</h1>
-<p><span th:text="${message}"></span></p>
+<h1>Home</h1>
+<p>Username: <span th:text="${user?.username}"></span></p>
+<p>Email: <span th:text="${user?.email}"></span></p>
+<p>Message: <span th:text="${message}"></span></p>
+<p>Custom: <span th:text="${custom}"></span></p>
+<p>Date: <span th:text="${#dates.format(date, 'yyyy-MM-dd')}"></span></p>
 </body>
 </html>
