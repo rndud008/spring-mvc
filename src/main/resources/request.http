@@ -1,19 +1,18 @@
-### Send POST request with body as parameters
-GET http://localhost:8081/body4
-Content-Type: application/json
+### Send GET request
+GET http://localhost:8081/api/users
 
-{
-  "id": 1,
-  "username": "springmvc1",
-  "age": 10
-}
+### Send GET request
+GET http://localhost:8081/api/public/users
 
-### Send POST request with body as parameters
-POST http://localhost:8081/users2
-Content-Type: application/json
+### Send GET request
+GET http://localhost:8081/login
 
-{
-  "id": 2,
-  "username": "springmvc2",
-  "age": 100
-}
+### Send GET request
+GET http://localhost:8081/log
+
+### Send GET request
+GET http://localhost:8081/admin
+Role: ADMIN
+
+### Send GET request
+GET http://localhost:8081/order
