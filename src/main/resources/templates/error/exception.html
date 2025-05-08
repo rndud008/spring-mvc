@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Error</title>
+    <title>500 Internal Server Error</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
         .container { max-width: 600px; margin: auto; }
@@ -11,9 +11,9 @@
 </head>
 <body>
 <div class="container">
-    <h1>오류 발생</h1>
-    <p>처리 중 오류가 발생했습니다.</p>
-    <p th:text="'오류 메시지: ' + ${message}"></p>
+    <h1>Exception Error</h1>
+    <p>서버 내부 오류가 발생했습니다. 잠시 후 다시 시도해주세요.</p>
+    <a href="/static" style="text-decoration:none; color:blue;">홈으로 돌아가기</a>
 </div>
 </body>
 </html>
