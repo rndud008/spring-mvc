@@ -16,3 +16,7 @@ Role: ADMIN
 
 ### Send GET request
 GET http://localhost:8081/order
+
+### Send GET request
+GET http://localhost:8081/jsonError
+Accept: application/json
