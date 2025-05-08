@@ -1,22 +1,13 @@
 ### Send GET request
-GET http://localhost:8081/api/users
+GET http://localhost:8081/error-view
+Accept: text/html
 
 ### Send GET request
-GET http://localhost:8081/api/public/users
-
-### Send GET request
-GET http://localhost:8081/login
-
-### Send GET request
-GET http://localhost:8081/log
-
-### Send GET request
-GET http://localhost:8081/admin
-Role: ADMIN
-
-### Send GET request
-GET http://localhost:8081/order
-
-### Send GET request
-GET http://localhost:8081/jsonError
+GET http://localhost:8081/error-json
 Accept: application/json
+
+### Send GET request
+GET http://localhost:8081/error-sendError
+
+### Send GET request
+GET http://localhost:8081/error-null
