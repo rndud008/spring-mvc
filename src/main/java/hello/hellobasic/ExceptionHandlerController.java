@@ -1,72 +1,29 @@
 package hello.hellobasic;
 
-import hello.hellobasic.exception.ChildException1;
-import hello.hellobasic.exception.ChildException2;
-import hello.hellobasic.exception.ParentException;
-import hello.hellobasic.exception.UserNotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import hello.hellobasic.exception.CustomNotFoundException;
+import hello.hellobasic.exception.CustomValidationException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class ExceptionHandlerController {
 
-    @GetMapping("/users/{id}")
-    public String getUser(@PathVariable("id") String id) {
-        throw new UserNotFoundException("User ID: " + id);
-    }
+    @GetMapping("/{id}")
+    public String handleException(@PathVariable("id") String id) {
+        if("notfound".equals(id)) {
+            throw new CustomNotFoundException("CustomNotFoundException");
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<String> handleUserNotFoundException(UserNotFoundException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
+        }else if("invalid".equals(id)) {
+            throw new CustomValidationException("CustomValidationException");
 
-    @GetMapping("/users")
-    public String getUsers(@RequestParam("name") String name) {
-        if("child1".equals(name)) {
-            throw new ChildException1("ChildException1");
-
-        }else if("child2".equals(name)) {
-            throw new ChildException2("ChildException2");
-
-        }else{
-            throw new ParentException("ParentException");
         }
-    }
-
-    @ExceptionHandler(ChildException1.class)
-    public String handleChildException1(ChildException1 ex) {
-        return "error/401";
+        throw new RuntimeException("RuntimeException");
     }
 /*
-    @ExceptionHandler(ChildException2.class)
-    @ResponseBody
-    public String handleChildException2(ChildException2 ex) {
-        return "ChildException2 : " + ex.getMessage();
-    }
-
-    @ExceptionHandler(ParentException.class)
-    @ResponseBody
-    public String handleParentException(ParentException ex) {
-        return "ParentException : " + ex.getMessage();
-    }
-
-    @ExceptionHandler({ChildException1.class, ChildException2.class, ParentException.class})
-    @ResponseBody
-    public String handleExceptions(ParentException ex) {
-        return "error/401";
-    }
-
-    @GetMapping("/default")
-    public String getDefault() {
-        throw new IllegalStateException("IllegalStateException");
-    }
-
-    @ExceptionHandler
-    @ResponseBody
-    public String handleDefault(IllegalStateException ex) {
-        return "Exception : " + ex.getMessage();
+    @ExceptionHandler(CustomNotFoundException.class)
+    public ResponseEntity<ProblemDetail> handleCustomNotFoundException(CustomNotFoundException ex) {
+        ErrorResponse errorResponse = new ErrorResponseException(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(errorResponse.getBody(), HttpStatus.FORBIDDEN);
     }*/
-
 }

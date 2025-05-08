@@ -1,13 +1,9 @@
-### Send GET request
-GET http://localhost:8081/error-view
-Accept: text/html
 
 ### Send GET request
-GET http://localhost:8081/error-json
-Accept: application/json
+GET http://localhost:8081/notfound
 
 ### Send GET request
-GET http://localhost:8081/error-sendError
+GET http://localhost:8081/invalid
 
 ### Send GET request
-GET http://localhost:8081/error-null
+GET http://localhost:8081/users
