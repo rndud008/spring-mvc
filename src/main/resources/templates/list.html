@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>업로드된 파일 목록</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        table { margin: auto; width: 80%; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #ccc; }
+        th { background-color: #f8f9fa; }
+        a { text-decoration: none; color: #007bff; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<h2>업로드된 파일 목록</h2>
+<table>
+    <thead>
+    <tr>
+        <th>게시글 ID</th>
+        <th>제목</th>
+        <th>ID</th>
+        <th>원본 파일명</th>
+        <th>저장된 파일명</th>
+        <th>파일 크기</th>
+        <th>파일 타입</th>
+        <th>다운로드</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${posts}">
+        <td th:text="${post.id}"></td>
+        <td th:text="${post.title}"></td>
+
+        <!-- 파일이 없는 경우 -->
+        <td colspan="6" th:if="${post.fileUploadInfo == null}">첨부 파일 없음</td>
+
+        <!-- 파일이 존재할 경우 -->
+        <td th:if="${post.fileUploadInfo != null}" th:text="${post.fileUploadInfo.id}"></td>
+        <td th:if="${post.fileUploadInfo != null}" th:text="${post.fileUploadInfo.originalFileName}"></td>
+        <td th:if="${post.fileUploadInfo != null}" th:text="${post.fileUploadInfo.storedFileName}"></td>
+        <td th:if="${post.fileUploadInfo != null}" th:text="${post.fileUploadInfo.fileSize} + ' bytes'"></td>
+        <td th:if="${post.fileUploadInfo != null}" th:text="${post.fileUploadInfo.contentType}"></td>
+        <td th:if="${post.fileUploadInfo != null}">
+            <a th:href="@{/download/{id}(id=${post.fileUploadInfo.id})}">다운로드</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<a th:href="@{/upload}">파일 업로드</a>
+</body>
+</html>
