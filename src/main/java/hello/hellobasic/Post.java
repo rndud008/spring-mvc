@@ -1,15 +1,13 @@
 package hello.hellobasic;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class PostResponse {
-
+@AllArgsConstructor
+public class Post {
     private int id;
     private String title;
     private String body;
     private int userId;
-
 }
