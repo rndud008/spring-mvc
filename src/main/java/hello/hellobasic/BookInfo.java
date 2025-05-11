@@ -1,11 +1,14 @@
 package hello.hellobasic;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BookInfo {
 
     @JsonProperty("title")
@@ -19,5 +22,4 @@ public class BookInfo {
 
     @JsonProperty("language")
     private List<String> languages;
-
 }
