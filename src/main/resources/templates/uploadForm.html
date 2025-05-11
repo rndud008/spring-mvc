@@ -2,27 +2,149 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>파일 업로드</title>
+    <title>게시글 + 파일 업로드</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        form { margin: 20px auto; padding: 20px; border: 1px solid #ccc; width: 50%; }
-        input[type="file"] { margin-bottom: 10px; }
-        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #218838; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+            text-align: left;
+        }
+
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .file-input {
+            border: 2px dashed #ccc;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .file-input:hover {
+            background-color: #e9ecef;
+        }
     </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadForm = document.getElementById('uploadForm');
+
+            uploadForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // 기본 폼 제출 방지
+
+                const formData = new FormData();
+                const titleInput = document.getElementById('title');
+                const contentInput = document.getElementById('content');
+                const userIdInput = document.getElementById('userId');
+                const commentInput = document.getElementById('comment');
+                const fileInput = document.getElementById('files');
+
+                // 파일 추가
+                for (let i = 0; i < fileInput.files.length; i++) {
+                    formData.append("files", fileInput.files[i]);
+                }
+
+                // 게시글 데이터 (JSON)
+                const metaData = {
+                    title: titleInput.value,
+                    content: contentInput.value,
+                    userId: userIdInput.value,
+                    comment: commentInput.value
+                };
+
+                formData.append("post", new Blob([JSON.stringify(metaData)], {
+                    type: "application/json"
+                }));
+
+                fetch("/upload", {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        alert("업로드 성공: " + result.title);
+                        window.location.href = "/listForm";
+                    })
+                    .catch(error => {
+                        console.error("업로드 실패:", error);
+                        alert("업로드 중 오류가 발생했습니다.");
+                    });
+            });
+        });
+    </script>
 </head>
 <body>
-<h2>파일 업로드</h2>
-<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
-    <label>게시글 제목:</label>
-    <input type="text" name="title" required>
-    <br><br>
-    <label>파일 선택:</label>
-    <input type="file" name="file" required>
-    <br>
-    <button type="submit">업로드</button>
-</form>
-<br>
-<a th:href="@{/list}">게시글 보기</a>
+<div class="container">
+    <h2>게시글 + 파일 업로드</h2>
+    <form id="uploadForm">
+        <label>게시글 제목:</label>
+        <input type="text" id="title" required>
+
+        <label>게시글 내용:</label>
+        <input type="text" id="content" required>
+
+        <label>사용자:</label>
+        <input type="text" id="userId" required>
+
+        <label>댓글:</label>
+        <input type="text" id="comment">
+
+        <label>파일 선택:</label>
+        <div class="file-input">
+            <input type="file" id="files" multiple>
+        </div>
+
+        <button type="submit">업로드</button>
+    </form>
+</div>
 </body>
 </html>

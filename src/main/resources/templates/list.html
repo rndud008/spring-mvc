@@ -2,52 +2,131 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>업로드된 파일 목록</title>
+    <title>게시글 목록</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        table { margin: auto; width: 80%; border-collapse: collapse; }
-        th, td { padding: 10px; border: 1px solid #ccc; }
-        th { background-color: #f8f9fa; }
-        a { text-decoration: none; color: #007bff; }
-        a:hover { text-decoration: underline; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .table-container {
+            width: 90%;
+            margin: 20px auto;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
     </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/list')
+                .then(response => response.json())
+                .then(posts => {
+                    const tableBody = document.getElementById('postTableBody');
+
+                    tableBody.innerHTML = '';
+                    if (posts.length === 0) {
+                        tableBody.innerHTML = `
+                        <tr id="noDataRow">
+                            <td colspan="6">등록된 게시글이 없습니다.</td>
+                        </tr>
+                    `;
+                    } else {
+                        posts.forEach(post => {
+                            let row = `<tr>
+                            <td>${post.id}</td>
+                            <td>${post.title}</td>
+                            <td>${post.content}</td>
+                            <td>${post.userId}</td>
+                            <td>${post.comment || '-'}</td>
+                            <td>${post.files.length > 0 ? post.files.map(file => `<a href="/download/${file.id}">${file.originalFilename}</a>`).join('<br>') : '첨부 파일 없음'}</td>
+                        </tr>`;
+                            tableBody.innerHTML += row;
+                        });
+                    }
+                })
+                .catch(error => console.error('게시글 목록 로딩 실패:', error));
+        });
+    </script>
 </head>
 <body>
-<h2>업로드된 파일 목록</h2>
-<table>
-    <thead>
-    <tr>
-        <th>게시글 ID</th>
-        <th>제목</th>
-        <th>ID</th>
-        <th>원본 파일명</th>
-        <th>저장된 파일명</th>
-        <th>파일 크기</th>
-        <th>파일 타입</th>
-        <th>다운로드</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="post : ${posts}">
-        <td th:text="${post.id}"></td>
-        <td th:text="${post.title}"></td>
+<h2>게시글 목록</h2>
 
-        <!-- 파일이 없는 경우 -->
-        <td colspan="6" th:if="${post.fileUploadInfo == null}">첨부 파일 없음</td>
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>작성자</th>
+            <th>댓글</th>
+            <th>첨부 파일</th>
+        </tr>
+        </thead>
+        <tbody id="postTableBody">
+        <tr id="noDataRow">
+            <td colspan="6">등록된 게시글이 없습니다.</td>
+        </tr>
+        </tbody>
 
-        <!-- 파일이 존재할 경우 -->
-        <td th:if="${post.fileUploadInfo != null}" th:text="${post.fileUploadInfo.id}"></td>
-        <td th:if="${post.fileUploadInfo != null}" th:text="${post.fileUploadInfo.originalFileName}"></td>
-        <td th:if="${post.fileUploadInfo != null}" th:text="${post.fileUploadInfo.storedFileName}"></td>
-        <td th:if="${post.fileUploadInfo != null}" th:text="${post.fileUploadInfo.fileSize} + ' bytes'"></td>
-        <td th:if="${post.fileUploadInfo != null}" th:text="${post.fileUploadInfo.contentType}"></td>
-        <td th:if="${post.fileUploadInfo != null}">
-            <a th:href="@{/download/{id}(id=${post.fileUploadInfo.id})}">다운로드</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<br>
-<a th:href="@{/upload}">파일 업로드</a>
+    </table>
+</div>
+
+<a href="/upload" class="btn">새 게시글 작성</a>
 </body>
 </html>
