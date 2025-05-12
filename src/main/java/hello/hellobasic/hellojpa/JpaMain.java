@@ -18,9 +18,12 @@ public class JpaMain {
         try {
 
 //            생성
+//            비영속
 //            Member member = new Member();
 //            member.setName("HelloB");
 //            member.setId(2l);
+//
+//            영속
 //            em.persist(member);
 
 //            수정 + 조회
