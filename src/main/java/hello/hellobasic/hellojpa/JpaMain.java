@@ -31,6 +31,12 @@ public class JpaMain {
 //            findMember.setName("HelloJPA");
 
 //            조회
+//            Member findMember1 = em.find(Member.class, 1l);
+//            Member findMember2 = em.find(Member.class, 1l);
+//            위의 것은 퀘리가 한번만 조회됨.
+//            System.out.println("result findMember1 == findMember2 = " + findMember1 == findMember2); // true
+
+//            조회
 //            List<Member> result = em.createQuery("select m from Member m", Member.class)
 //                    .setFirstResult(5)
 //                    .setMaxResults(7)
