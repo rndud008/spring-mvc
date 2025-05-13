@@ -24,6 +24,10 @@ public class Member {
     // 읽기 전용으로 사용
     private Team team;
 
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
 
 //    public void changeTeam(Team team){
 //        // 연관관계 편의 메서드

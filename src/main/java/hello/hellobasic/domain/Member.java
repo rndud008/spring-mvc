@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import java.util.*;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 public class Member {
