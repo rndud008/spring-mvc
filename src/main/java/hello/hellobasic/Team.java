@@ -1,4 +1,4 @@
-package hello.hellobasic.domain;
+package hello.hellobasic;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,14 +10,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Member {
+public class Team {
     @Id
     @GeneratedValue
-    @Column(name = "MEMBER_ID")
+    @Column(name = "TEAM_ID")
     private Long id;
     private String name;
-    private String city;
-    private String strret;
-    private String zipcode;
+
 
 }
