@@ -1,6 +1,6 @@
 package hello.hellobasic;
 
-import hello.hellobasic.domain.Member;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -17,10 +17,7 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Member member = new Member();
-            member.setId(1L);
-            member.setName("hello");
-            em.persist(member);
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();
