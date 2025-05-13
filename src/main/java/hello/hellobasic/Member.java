@@ -20,13 +20,14 @@ public class Member {
 //    private Long teamId;
 
     @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
+    @JoinColumn(name = "TEAM_ID",insertable = false,updatable = false)
+    // 읽기 전용으로 사용
     private Team team;
 
 
-    public void changeTeam(Team team){
-        // 연관관계 편의 메서드
-        this.team = team;
-        team.getMembers().add(this);
-    }
+//    public void changeTeam(Team team){
+//        // 연관관계 편의 메서드
+//        this.team = team;
+//        team.getMembers().add(this);
+//    }
 }
