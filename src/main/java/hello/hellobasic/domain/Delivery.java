@@ -1,5 +1,6 @@
 package hello.hellobasic.domain;
 
+import hello.hellobasic.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -8,7 +9,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class Delivery {
+public class Delivery extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id;

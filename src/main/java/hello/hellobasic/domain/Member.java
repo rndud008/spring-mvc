@@ -1,5 +1,6 @@
 package hello.hellobasic.domain;
 
+import hello.hellobasic.BaseEntity;
 import hello.hellobasic.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import java.util.*;
 //@Entity
 @Getter
 @Setter
-public class Member {
+public class Member extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "MEMBER_ID")

@@ -1,11 +1,12 @@
 package hello.hellobasic.domain;
 
+import hello.hellobasic.BaseEntity;
 import jakarta.persistence.*;
 
 import java.util.*;
 
 @Entity
-public class Category {
+public class Category extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id;

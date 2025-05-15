@@ -1,5 +1,6 @@
 package hello.hellobasic.domain;
 
+import hello.hellobasic.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import java.util.*;
 @Table(name = "ORDERS")
 @Getter
 @Setter
-public class Order {
+public class Order extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "ORDER_ID")
