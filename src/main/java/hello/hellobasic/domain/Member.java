@@ -1,5 +1,6 @@
 package hello.hellobasic.domain;
 
+import hello.hellobasic.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +22,7 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
+
+
 
 }
