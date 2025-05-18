@@ -5,7 +5,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
-import java.util.List;
+import java.util.*;
+
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -172,28 +173,82 @@ public class JpaMain {
 //            member.setWorkPeriod(new Period());
 //            em.persist(member);
 
-            Address address = new Address("city","street","10000");
+//            Address address = new Address("city","street","10000");
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            member.setHomeAddress(address);
+//            em.persist(member);
+//
+//            Member member2 = new Member();
+//            member2.setUsername("member2");
+//            member2.setHomeAddress(address);
+//            em.persist(member2);
+//            // 잘못된 방법
+////            member.getHomeAddress().setCity("newCity");
+//            // member, member2 의 어드레스값에 영향을 미침.
+//            // 값을 복사해서 사용해야함.
+//            //  Address newAddress = new Address(address.getCity(),address.getStreet(),address.getZipcode());
+//
+//            // 올바른 방법
+//            Address newAddress = new Address("NewCity",address.getStreet(),address.getZipcode());
+//            member.setHomeAddress(newAddress);
+
+
             Member member = new Member();
             member.setUsername("member1");
-            member.setHomeAddress(address);
+            member.setHomeAddress(new Address("homeCity","street","10000"));
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("족발");
+            member.getFavoriteFoods().add("피자");
+
+//            member.getAddressHistory().add(new Address("old1","street","10000"));
+//            member.getAddressHistory().add(new Address("old2","street","10000"));
+
+            member.getAddressHistory().add(new AddressEntity(new Address("old1","street","10000")));
+            member.getAddressHistory().add(new AddressEntity(new Address("old2","street","10000")));
+
             em.persist(member);
 
-            Member member2 = new Member();
-            member2.setUsername("member2");
-            member2.setHomeAddress(address);
-            em.persist(member2);
-            // 잘못된 방법
-//            member.getHomeAddress().setCity("newCity");
-            // member, member2 의 어드레스값에 영향을 미침.
-            // 값을 복사해서 사용해야함.
-            //  Address newAddress = new Address(address.getCity(),address.getStreet(),address.getZipcode());
+            em.flush();
+            em.clear();
 
-            // 올바른 방법
-            Address newAddress = new Address("NewCity",address.getStreet(),address.getZipcode());
-            member.setHomeAddress(newAddress);
+            System.out.println("====================================================================");
+            Member findMember = em.find(Member.class, member.getId());
 
+//            List<Address> addressHistory = findMember.getAddressHistory();
+//            for (Address address : addressHistory) {
+//                System.out.println("address = " + address);
+//            }
+//
+//            Set<String> favoriteFoods = findMember.getFavoriteFoods();
+//
+//            for (String favoriteFood : favoriteFoods) {
+//                System.out.println("favoriteFood = " + favoriteFood);
+//            }
 
+            Address oldAddress = findMember.getHomeAddress();
+            findMember.setHomeAddress(new Address("newCity",oldAddress.getStreet(),oldAddress.getZipcode()));
 
+            // 치킨 -> 한식
+            findMember.getFavoriteFoods().remove("치킨");
+            findMember.getFavoriteFoods().add("한식");
+
+            // ADDRRESS에  equals 와 hashcode를 구현하지 않으면 값이 삭제 되지않음,
+            //     @Override
+            //    public boolean equals(Object o) {
+            //        if (this == o) return true;
+            //        if (o == null || getClass() != o.getClass()) return false;
+            //        Address address = (Address) o;
+            //        return Objects.equals(city, address.city) && Objects.equals(street, address.street) && Objects.equals(zipcode, address.zipcode);
+            //    }
+            //
+            //    @Override
+            //    public int hashCode() {
+            //        return Objects.hash(city, street, zipcode);
+            //    }
+
+//            findMember.getAddressHistory().remove(new Address("old1","street","10000"));
+//            findMember.getAddressHistory().add(new Address("newCity1","street","10000"));
 
 
             tx.commit();

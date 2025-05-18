@@ -24,6 +24,7 @@
         <class>hello.hellobasic.Movie</class>
         <class>hello.hellobasic.Parent</class>
         <class>hello.hellobasic.Child</class>
+        <class>hello.hellobasic.AddressEntity</class>
 <!--        glade  프로젝트여서 인지 entity 를 스캔하지 못함 따로 명시적으로 추가해야 테이블생성-->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
