@@ -4,29 +4,31 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
     <persistence-unit name="hello" transaction-type="RESOURCE_LOCAL">
-                <class>hello.hellobasic.domain.Member</class> <!-- 이 라인 추가 -->
-                <class>hello.hellobasic.domain.Item</class> <!-- 이 라인 추가 -->
-                <class>hello.hellobasic.domain.Order</class> <!-- 이 라인 추가 -->
-                <class>hello.hellobasic.domain.OrderItem</class> <!-- 이 라인 추가 -->
-                <class>hello.hellobasic.domain.Category</class> <!-- 이 라인 추가 -->
-                <class>hello.hellobasic.domain.Delivery</class> <!-- 이 라인 추가 -->
-                <class>hello.hellobasic.domain.Movie</class> <!-- 이 라인 추가 -->
-                <class>hello.hellobasic.domain.Book</class> <!-- 이 라인 추가 -->
-                <class>hello.hellobasic.domain.Album</class> <!-- 이 라인 추가 -->
+<!--                <class>hello.hellobasic.domain.Member</class> &lt;!&ndash; 이 라인 추가 &ndash;&gt;-->
+<!--                <class>hello.hellobasic.domain.Item</class> &lt;!&ndash; 이 라인 추가 &ndash;&gt;-->
+<!--                <class>hello.hellobasic.domain.Order</class> &lt;!&ndash; 이 라인 추가 &ndash;&gt;-->
+<!--                <class>hello.hellobasic.domain.OrderItem</class> &lt;!&ndash; 이 라인 추가 &ndash;&gt;-->
+<!--                <class>hello.hellobasic.domain.Category</class> &lt;!&ndash; 이 라인 추가 &ndash;&gt;-->
+<!--                <class>hello.hellobasic.domain.Delivery</class> &lt;!&ndash; 이 라인 추가 &ndash;&gt;-->
+<!--                <class>hello.hellobasic.domain.Movie</class> &lt;!&ndash; 이 라인 추가 &ndash;&gt;-->
+<!--                <class>hello.hellobasic.domain.Book</class> &lt;!&ndash; 이 라인 추가 &ndash;&gt;-->
+<!--                <class>hello.hellobasic.domain.Album</class> &lt;!&ndash; 이 라인 추가 &ndash;&gt;-->
 
-<!--        <class>hello.hellobasic.Member</class> &lt;!&ndash; 이 라인 추가 &ndash;&gt;-->
-<!--        <class>hello.hellobasic.Team</class>-->
-<!--        <class>hello.hellobasic.Locker</class>-->
-<!--        <class>hello.hellobasic.Product</class>-->
-<!--        <class>hello.hellobasic.MemberProduct</class>-->
-<!--        <class>hello.hellobasic.Item</class>-->
-<!--        <class>hello.hellobasic.Book</class>-->
-<!--        <class>hello.hellobasic.Movie</class>-->
+        <class>hello.hellobasic.Member</class> <!-- 이 라인 추가 -->
+        <class>hello.hellobasic.Team</class>
+        <class>hello.hellobasic.Locker</class>
+        <class>hello.hellobasic.Product</class>
+        <class>hello.hellobasic.MemberProduct</class>
+        <class>hello.hellobasic.Item</class>
+        <class>hello.hellobasic.Book</class>
+        <class>hello.hellobasic.Movie</class>
+        <class>hello.hellobasic.Parent</class>
+        <class>hello.hellobasic.Child</class>
 <!--        glade  프로젝트여서 인지 entity 를 스캔하지 못함 따로 명시적으로 추가해야 테이블생성-->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/jpashop"/>
-<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>-->
+<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/jpashop"/>-->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value=""/>
 
