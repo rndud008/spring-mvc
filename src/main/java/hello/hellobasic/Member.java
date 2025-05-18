@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Member extends BaseEntity {
+public class Member  {
     @Id
     @GeneratedValue
     @Column(name = "MEMBER_ID")
@@ -40,7 +40,18 @@ public class Member extends BaseEntity {
     @JoinTable(name = "MEMBER_PRODUCT")
     private List<Product> products = new ArrayList<>();
 
+    @Embedded
+    private Period workPeriod;
+    @Embedded
+    private Address homeAddress;
 
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "city", column = @Column(name = "work_city"))
+            ,@AttributeOverride(name = "street", column = @Column(name = "work_street"))
+            ,@AttributeOverride(name = "zipcode", column = @Column(name = "work_zipcode"))
+    })
+    private Address workAddress;
 
 
 //    public void changeTeam(Team team){

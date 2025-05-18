@@ -142,29 +142,36 @@ public class JpaMain {
 //            Movie findMovie = em.find(Movie.class, movie.getId());
 //            System.out.println("findMovie = " + findMovie);
 
-            Child child1 = new Child();
-            Child child2 = new Child();
+//            Child child1 = new Child();
+//            Child child2 = new Child();
+//
+//            Parent parent = new Parent();
+//            parent.addChild(child1);
+//            parent.addChild(child2);
+//
+//            em.persist(parent);
+////            CASCADE 설정으로 child 의 persist 를 통해 작성안할수도 있음.
+////            CASCADE 는 단일 종속적일때만 사용하는게 좋음 다른곳에서 같이 사용하면 원하지않는 동작발동가능성있음.
+////            em.persist(child1);
+////            em.persist(child2);
+//
+//            em.flush();
+//            em.clear();
+//
+////            고아객체
+////            orphanRemoval = true 설정
+////            참조가 제거된 엔티티는 다른곳에서 참조하지 않는 고아 객체로 보고 삭제하는 기능
+////            참조하는곳이 하니일때 사용해야 하고 특정엔티티가 개인 소유일때 사용
+//            Parent findParent = em.find(Parent.class, parent.getId());
+//            findParent.getChildList().remove(0);
 
-            Parent parent = new Parent();
-            parent.addChild(child1);
-            parent.addChild(child2);
 
-            em.persist(parent);
-//            CASCADE 설정으로 child 의 persist 를 통해 작성안할수도 있음.
-//            CASCADE 는 단일 종속적일때만 사용하는게 좋음 다른곳에서 같이 사용하면 원하지않는 동작발동가능성있음.
-//            em.persist(child1);
-//            em.persist(child2);
+            Member member = new Member();
+            member.setUsername("hello");
+            member.setHomeAddress(new Address("city", "street", "10000"));
+            member.setWorkPeriod(new Period());
 
-            em.flush();
-            em.clear();
-
-//            고아객체
-//            orphanRemoval = true 설정
-//            참조가 제거된 엔티티는 다른곳에서 참조하지 않는 고아 객체로 보고 삭제하는 기능
-//            참조하는곳이 하니일때 사용해야 하고 특정엔티티가 개인 소유일때 사용
-            Parent findParent = em.find(Parent.class, parent.getId());
-            findParent.getChildList().remove(0);
-
+            em.persist(member);
 
 
             tx.commit();
