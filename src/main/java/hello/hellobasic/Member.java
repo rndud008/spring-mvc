@@ -71,11 +71,11 @@ public class Member  {
     @JoinColumn(name = "MEMBER_ID")
     private List<AddressEntity> addressHistory = new ArrayList<>();
 
-//    public void changeTeam(Team team){
-//        // 연관관계 편의 메서드
-//        this.team = team;
-//        team.getMembers().add(this);
-//    }
+    public void changeTeam(Team team){
+        // 연관관계 편의 메서드
+        this.team = team;
+        team.getMembers().add(this);
+    }
 
 
     @Override

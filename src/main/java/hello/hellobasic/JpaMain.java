@@ -50,7 +50,6 @@ public class JpaMain {
 //            System.out.println("findTeam = " + findTeam);
 
 
-
 //            // 연관관계의 주인
 //            Member member = new Member();
 //            member.setUsername("member1");
@@ -251,47 +250,65 @@ public class JpaMain {
 ////            findMember.getAddressHistory().add(new Address("newCity1","street","10000"));
 
 
-            for (int i = 0; i < 100; i++) {
-                Member member = new Member();
-                member.setUsername("member"+i);
-                member.setAge(i);
-                em.persist(member);
-            }
+//            for (int i = 0; i < 100; i++) {
+//                Member member = new Member();
+//                member.setUsername("member"+i);
+//                member.setAge(i);
+//                em.persist(member);
+//            }
+//
+//
+//            List<Member> resultList = em.createQuery("select m from Member m where m.username = :username", Member.class)
+//                    .setParameter("username", "kkk")
+//                    .getResultList();
+//
+//            List<Object[]> resultList1 = em.createQuery("select m.username, m.age from Member m").getResultList();
+//
+//            Object[] result = resultList1.get(0);
+//            System.out.println("username = " + result[0]);
+//            System.out.println("age = " + result[1]);
+//
+//
+//            List<MemberDTO> resultList2 = em.createQuery("select new hello.hellobasic.MemberDTO(m.username, m.age) from Member m", MemberDTO.class).getResultList();
+//            MemberDTO memberDTO = resultList2.get(0);
+//            System.out.println("memberDTO.getAge() = " + memberDTO.getAge());
+//            System.out.println("memberDTO.getUsername() = " + memberDTO.getUsername());
+//
+//            List<Member> resultList3 = em.createQuery("select m from Member m order by m.age desc", Member.class)
+//                    .setFirstResult(0)
+//                    .setMaxResults(10)
+//                    .getResultList();
+//
+//            System.out.println("resultList3.size() = " + resultList3.size());
+//
+//            for (Member member : resultList3) {
+//                System.out.println("member = " + member);
+//            }
 
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
 
-            List<Member> resultList = em.createQuery("select m from Member m where m.username = :username", Member.class)
-                    .setParameter("username", "kkk")
-                    .getResultList();
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setAge(10);
+            member.changeTeam(team);
 
-            List<Object[]> resultList1 = em.createQuery("select m.username, m.age from Member m").getResultList();
+            em.persist(member);
 
-            Object[] result = resultList1.get(0);
-            System.out.println("username = " + result[0]);
-            System.out.println("age = " + result[1]);
+            em.flush();
+            em.clear();
 
+            String query = "select m from Member m inner join m.team t on t.name= m.username";
+            List<Member> result = em.createQuery(query, Member.class).getResultList();
 
-            List<MemberDTO> resultList2 = em.createQuery("select new hello.hellobasic.MemberDTO(m.username, m.age) from Member m", MemberDTO.class).getResultList();
-            MemberDTO memberDTO = resultList2.get(0);
-            System.out.println("memberDTO.getAge() = " + memberDTO.getAge());
-            System.out.println("memberDTO.getUsername() = " + memberDTO.getUsername());
-
-            List<Member> resultList3 = em.createQuery("select m from Member m order by m.age desc", Member.class)
-                    .setFirstResult(0)
-                    .setMaxResults(10)
-                    .getResultList();
-
-            System.out.println("resultList3.size() = " + resultList3.size());
-
-            for (Member member : resultList3) {
-                System.out.println("member = " + member);
-            }
 
 
 
             tx.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             tx.rollback();
-        }finally {
+        } finally {
             em.close();
         }
 
