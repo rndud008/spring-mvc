@@ -293,6 +293,7 @@ public class JpaMain {
             member.setUsername("member1");
             member.setAge(10);
             member.changeTeam(team);
+            member.setMemberType(MemberType.ADMIN);
 
             em.persist(member);
 
@@ -306,7 +307,20 @@ public class JpaMain {
             String subQuery = "select (select avg (m1.age) from Member m1 ) as avgAge from Member m inner join m.team t on t.name= m.username";
             em.createQuery(subQuery, Member.class).getResultList();
 
+//            List<Object[]> resultList = em.createQuery("select  m.username, 'hello', true from Member m " +
+//                    "where m.memberType =  hello.hellobasic.MemberType.ADMIN").getResultList();
 
+            List<Object[]> resultList = em.createQuery("select  m.username, 'hello', true from Member m " +
+                    "where m.memberType =  :type")
+                    .setParameter("type",MemberType.ADMIN)
+                    .getResultList();
+
+            for (Object[] objects : resultList) {
+                System.out.println("objects[0] = " + objects[0]);
+                System.out.println("objects[1] = " + objects[1]);
+                System.out.println("objects[2] = " + objects[2]);
+
+            }
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
