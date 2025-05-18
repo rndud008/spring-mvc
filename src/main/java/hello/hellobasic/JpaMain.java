@@ -166,12 +166,34 @@ public class JpaMain {
 //            findParent.getChildList().remove(0);
 
 
-            Member member = new Member();
-            member.setUsername("hello");
-            member.setHomeAddress(new Address("city", "street", "10000"));
-            member.setWorkPeriod(new Period());
+//            Member member = new Member();
+//            member.setUsername("hello");
+//            member.setHomeAddress(new Address("city", "street", "10000"));
+//            member.setWorkPeriod(new Period());
+//            em.persist(member);
 
+            Address address = new Address("city","street","10000");
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setHomeAddress(address);
             em.persist(member);
+
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            member2.setHomeAddress(address);
+            em.persist(member2);
+            // 잘못된 방법
+//            member.getHomeAddress().setCity("newCity");
+            // member, member2 의 어드레스값에 영향을 미침.
+            // 값을 복사해서 사용해야함.
+            //  Address newAddress = new Address(address.getCity(),address.getStreet(),address.getZipcode());
+
+            // 올바른 방법
+            Address newAddress = new Address("NewCity",address.getStreet(),address.getZipcode());
+            member.setHomeAddress(newAddress);
+
+
+
 
 
             tx.commit();

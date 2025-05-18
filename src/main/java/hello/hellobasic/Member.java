@@ -39,7 +39,7 @@ public class Member  {
     @ManyToMany
     @JoinTable(name = "MEMBER_PRODUCT")
     private List<Product> products = new ArrayList<>();
-
+    // 값 타입은 불변 객체로 설계 해야함
     @Embedded
     private Period workPeriod;
     @Embedded
