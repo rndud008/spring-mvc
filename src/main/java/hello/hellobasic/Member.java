@@ -22,6 +22,8 @@ public class Member  {
     @Column(name = "USERNAME")
     private String username;
 
+    private Integer age;
+
 //    @Column(name = "TEAM_ID")
 //    private Long teamId;
 

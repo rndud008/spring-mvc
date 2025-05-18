@@ -194,61 +194,72 @@ public class JpaMain {
 //            member.setHomeAddress(newAddress);
 
 
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            member.setHomeAddress(new Address("homeCity","street","10000"));
+//            member.getFavoriteFoods().add("치킨");
+//            member.getFavoriteFoods().add("족발");
+//            member.getFavoriteFoods().add("피자");
+//
+////            member.getAddressHistory().add(new Address("old1","street","10000"));
+////            member.getAddressHistory().add(new Address("old2","street","10000"));
+//
+//            member.getAddressHistory().add(new AddressEntity(new Address("old1","street","10000")));
+//            member.getAddressHistory().add(new AddressEntity(new Address("old2","street","10000")));
+//
+//            em.persist(member);
+//
+//            em.flush();
+//            em.clear();
+//
+//            System.out.println("====================================================================");
+//            Member findMember = em.find(Member.class, member.getId());
+//
+////            List<Address> addressHistory = findMember.getAddressHistory();
+////            for (Address address : addressHistory) {
+////                System.out.println("address = " + address);
+////            }
+////
+////            Set<String> favoriteFoods = findMember.getFavoriteFoods();
+////
+////            for (String favoriteFood : favoriteFoods) {
+////                System.out.println("favoriteFood = " + favoriteFood);
+////            }
+//
+//            Address oldAddress = findMember.getHomeAddress();
+//            findMember.setHomeAddress(new Address("newCity",oldAddress.getStreet(),oldAddress.getZipcode()));
+//
+//            // 치킨 -> 한식
+//            findMember.getFavoriteFoods().remove("치킨");
+//            findMember.getFavoriteFoods().add("한식");
+//
+//            // ADDRRESS에  equals 와 hashcode를 구현하지 않으면 값이 삭제 되지않음,
+//            //     @Override
+//            //    public boolean equals(Object o) {
+//            //        if (this == o) return true;
+//            //        if (o == null || getClass() != o.getClass()) return false;
+//            //        Address address = (Address) o;
+//            //        return Objects.equals(city, address.city) && Objects.equals(street, address.street) && Objects.equals(zipcode, address.zipcode);
+//            //    }
+//            //
+//            //    @Override
+//            //    public int hashCode() {
+//            //        return Objects.hash(city, street, zipcode);
+//            //    }
+//
+////            findMember.getAddressHistory().remove(new Address("old1","street","10000"));
+////            findMember.getAddressHistory().add(new Address("newCity1","street","10000"));
+
             Member member = new Member();
             member.setUsername("member1");
-            member.setHomeAddress(new Address("homeCity","street","10000"));
-            member.getFavoriteFoods().add("치킨");
-            member.getFavoriteFoods().add("족발");
-            member.getFavoriteFoods().add("피자");
-
-//            member.getAddressHistory().add(new Address("old1","street","10000"));
-//            member.getAddressHistory().add(new Address("old2","street","10000"));
-
-            member.getAddressHistory().add(new AddressEntity(new Address("old1","street","10000")));
-            member.getAddressHistory().add(new AddressEntity(new Address("old2","street","10000")));
+            member.setAge(10);
 
             em.persist(member);
 
-            em.flush();
-            em.clear();
+            List<Member> resultList = em.createQuery("select m from Member m where m.username = :username", Member.class)
+                    .setParameter("username", "kkk")
+                    .getResultList();
 
-            System.out.println("====================================================================");
-            Member findMember = em.find(Member.class, member.getId());
-
-//            List<Address> addressHistory = findMember.getAddressHistory();
-//            for (Address address : addressHistory) {
-//                System.out.println("address = " + address);
-//            }
-//
-//            Set<String> favoriteFoods = findMember.getFavoriteFoods();
-//
-//            for (String favoriteFood : favoriteFoods) {
-//                System.out.println("favoriteFood = " + favoriteFood);
-//            }
-
-            Address oldAddress = findMember.getHomeAddress();
-            findMember.setHomeAddress(new Address("newCity",oldAddress.getStreet(),oldAddress.getZipcode()));
-
-            // 치킨 -> 한식
-            findMember.getFavoriteFoods().remove("치킨");
-            findMember.getFavoriteFoods().add("한식");
-
-            // ADDRRESS에  equals 와 hashcode를 구현하지 않으면 값이 삭제 되지않음,
-            //     @Override
-            //    public boolean equals(Object o) {
-            //        if (this == o) return true;
-            //        if (o == null || getClass() != o.getClass()) return false;
-            //        Address address = (Address) o;
-            //        return Objects.equals(city, address.city) && Objects.equals(street, address.street) && Objects.equals(zipcode, address.zipcode);
-            //    }
-            //
-            //    @Override
-            //    public int hashCode() {
-            //        return Objects.hash(city, street, zipcode);
-            //    }
-
-//            findMember.getAddressHistory().remove(new Address("old1","street","10000"));
-//            findMember.getAddressHistory().add(new Address("newCity1","street","10000"));
 
 
             tx.commit();
