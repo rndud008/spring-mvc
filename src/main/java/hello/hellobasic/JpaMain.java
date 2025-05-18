@@ -302,7 +302,9 @@ public class JpaMain {
             String query = "select m from Member m inner join m.team t on t.name= m.username";
             List<Member> result = em.createQuery(query, Member.class).getResultList();
 
-
+            // from 절은 서브쿼리 불가능
+            String subQuery = "select (select avg (m1.age) from Member m1 ) as avgAge from Member m inner join m.team t on t.name= m.username";
+            em.createQuery(subQuery, Member.class).getResultList();
 
 
             tx.commit();
