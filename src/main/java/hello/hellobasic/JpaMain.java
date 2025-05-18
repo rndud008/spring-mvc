@@ -260,7 +260,17 @@ public class JpaMain {
                     .setParameter("username", "kkk")
                     .getResultList();
 
+            List<Object[]> resultList1 = em.createQuery("select m.username, m.age from Member m").getResultList();
 
+            Object[] result = resultList1.get(0);
+            System.out.println("username = " + result[0]);
+            System.out.println("age = " + result[1]);
+
+
+            List<MemberDTO> resultList2 = em.createQuery("select new hello.hellobasic.MemberDTO(m.username, m.age) from Member m", MemberDTO.class).getResultList();
+            MemberDTO memberDTO = resultList2.get(0);
+            System.out.println("memberDTO.getAge() = " + memberDTO.getAge());
+            System.out.println("memberDTO.getUsername() = " + memberDTO.getUsername());
 
             tx.commit();
         }catch (Exception e){
