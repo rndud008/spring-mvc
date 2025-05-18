@@ -250,11 +250,14 @@ public class JpaMain {
 ////            findMember.getAddressHistory().remove(new Address("old1","street","10000"));
 ////            findMember.getAddressHistory().add(new Address("newCity1","street","10000"));
 
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setAge(10);
 
-            em.persist(member);
+            for (int i = 0; i < 100; i++) {
+                Member member = new Member();
+                member.setUsername("member"+i);
+                member.setAge(i);
+                em.persist(member);
+            }
+
 
             List<Member> resultList = em.createQuery("select m from Member m where m.username = :username", Member.class)
                     .setParameter("username", "kkk")
@@ -271,6 +274,19 @@ public class JpaMain {
             MemberDTO memberDTO = resultList2.get(0);
             System.out.println("memberDTO.getAge() = " + memberDTO.getAge());
             System.out.println("memberDTO.getUsername() = " + memberDTO.getUsername());
+
+            List<Member> resultList3 = em.createQuery("select m from Member m order by m.age desc", Member.class)
+                    .setFirstResult(0)
+                    .setMaxResults(10)
+                    .getResultList();
+
+            System.out.println("resultList3.size() = " + resultList3.size());
+
+            for (Member member : resultList3) {
+                System.out.println("member = " + member);
+            }
+
+
 
             tx.commit();
         }catch (Exception e){

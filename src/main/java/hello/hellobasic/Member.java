@@ -3,6 +3,7 @@ package hello.hellobasic;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -75,4 +76,14 @@ public class Member  {
 //        this.team = team;
 //        team.getMembers().add(this);
 //    }
+
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }
