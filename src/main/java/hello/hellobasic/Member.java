@@ -23,7 +23,7 @@ public class Member extends BaseEntity {
 //    @Column(name = "TEAM_ID")
 //    private Long teamId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID",insertable = false,updatable = false)
     // 읽기 전용으로 사용
     private Team team;
